@@ -28,8 +28,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    NSExpression * expression = [NSExpression expressionWithFormat:@"2+2="];
-//    NSLog(@"%@", expression);
+    NSExpression * expression = [NSExpression expressionWithFormat:@"2.1+2"];
+    NSNumber *result = [expression expressionValueWithObject:nil context:nil];
+    NSLog(@"%@", result);
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -52,6 +53,14 @@
 - (IBAction)pointButtonDidTouch:(UIButton *)sender {
     if (! [self.resultLabel.text containsString:@"."])
         self.resultLabel.text = [self.resultLabel.text stringByAppendingString:@"."];
+}
+- (IBAction)negationButtonDidTouch:(UIButton *)sender {
+    if ([self.resultLabel.text containsString:@"-"]) {
+        self.resultLabel.text = [self.resultLabel.text substringFromIndex:1];
+    }
+    else{
+        self.resultLabel.text = [@"-" stringByAppendingString:self.resultLabel.text];
+    }
 }
 
 

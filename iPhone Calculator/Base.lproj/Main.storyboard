@@ -132,6 +132,9 @@ ERcSw5c
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73S-WV-Md0">
                                 <rect key="frame" x="66" y="49" width="30" height="30"/>
                                 <state key="normal" title="±"/>
+                                <connections>
+                                    <action selector="negationButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yg4-YQ-8Ge"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QiQ-LQ-2qB">
                                 <rect key="frame" x="20" y="49" width="30" height="30"/>
