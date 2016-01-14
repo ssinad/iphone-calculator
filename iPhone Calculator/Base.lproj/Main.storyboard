@@ -108,22 +108,37 @@
 ERcSw5c
 </string>
                                 </state>
+                                <connections>
+                                    <action selector="multiplicationButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ePk-N8-I0K"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNa-qS-cTC">
                                 <rect key="frame" x="157" y="49" width="30" height="30"/>
                                 <state key="normal" title="÷"/>
+                                <connections>
+                                    <action selector="divisionButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SCg-Zb-1Hl"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFN-Y0-Z4z">
                                 <rect key="frame" x="157" y="125" width="30" height="30"/>
                                 <state key="normal" title="-"/>
+                                <connections>
+                                    <action selector="subtractButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XyJ-1p-7eV"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCR-qw-21F">
                                 <rect key="frame" x="157" y="163" width="30" height="30"/>
                                 <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="addButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DqY-pB-h64"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTe-KI-tIj">
                                 <rect key="frame" x="157" y="201" width="30" height="30"/>
                                 <state key="normal" title="="/>
+                                <connections>
+                                    <action selector="equalButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QMZ-jL-qFf"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01S-BO-oQa">
                                 <rect key="frame" x="112" y="49" width="30" height="30"/>

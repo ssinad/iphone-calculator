@@ -10,16 +10,23 @@
 
 @interface CalculatorModel : NSObject
 typedef NS_ENUM(NSUInteger, CalculatorOperator) {
+    N = -1,
     ADD = 0,
     SUBTRACT = 1,
     MULTIPLY = 2,
     DIVIDE = 3
 };
 
--(void)addOperator:(CalculatorOperator) calculatorOperator;
--(void)addOperand:(NSDecimalNumber *) operand;
+-(NSString * )addOperator:(CalculatorOperator) calculatorOperator;
+-(void)addOperand:(NSString *) operand;
 +(BOOL)isValidNumber : (NSString *) string;
-@property NSDecimalNumber * result;
+-(void)resetAll;
+-(NSString *) equalEval;
+-(NSString *) equalEval:(NSString *) operand;
+-(NSString *) percentEval;
+-(void) eval;
+
+@property (readonly) NSString * resultString;
 @property NSError * error;
 
 @end
