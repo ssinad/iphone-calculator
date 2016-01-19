@@ -11,8 +11,21 @@
 @interface CalculatorModel : NSObject
 typedef NS_ENUM(NSUInteger, CalculatorState) {
     CalculatorStateInitial,
+    CalculatorStateEnteringFirstNumber,
+    CalculatorStateEnteringNumber,
+    CalculatorStateFirstOperatorSelected,
     CalculatorStateOperatorSelected,
-    CalculatorStateEnteringNumber
+    CalculatorStateEqual
+};
+typedef NS_ENUM(NSUInteger, CalculatorOperator) {
+    N = -1,
+    ADD = 0,
+    SUBTRACT = 1,
+    MULTIPLY = 2,
+    DIVIDE = 3
 };
 @property (readonly) CalculatorState state;
+-(void)addCharacter:(NSString *) character;
+-(NSString *)addOperator:(CalculatorOperator) calculatorOperator andLabelText: (NSString *) number;
+-(void)resetAll;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "CalculatorModel.h"
 
 @interface ViewController ()
 -(void)setResultLabelText:(NSString*) number;
@@ -38,21 +39,23 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-//- (IBAction)NumberButtonDidTouch:(id)sender {
-//    if (! [sender isKindOfClass:[UIButton class]])
-//        return;
-//    [self setResultLabelText:((UIButton *) sender).titleLabel.text];
-//}
+
+
+
 - (IBAction)numberButtonDidTouch:(UIButton *)sender {
     [self setResultLabelText:sender.titleLabel.text];
+    [self.calculatorModel addCharacter:sender.titleLabel.text];
 //    if (![sender.titleLabel.text isEqualToString:@"0"])
 //        [self.clearButton setTitle:@"C" forState:UIControlStateNormal];
     
 }
 
 - (IBAction)pointButtonDidTouch:(UIButton *)sender {
-    if (! [self.resultLabel.text containsString:@"."])
+    if (! [self.resultLabel.text containsString:@"."]){
         self.resultLabel.text = [self.resultLabel.text stringByAppendingString:@"."];
+        [self.calculatorModel addCharacter:sender.titleLabel.text];
+    }
+    
 }
 - (IBAction)negationButtonDidTouch:(UIButton *)sender {
     if ([self.resultLabel.text containsString:@"-"]) {
@@ -61,18 +64,25 @@
     else{
         self.resultLabel.text = [@"-" stringByAppendingString:self.resultLabel.text];
     }
+    [self.calculatorModel addCharacter:@"-"];
 }
 
 - (IBAction)addButtonDidTouch:(UIButton *)sender {
+    NSString * tmp = @"2";
+    NSLog(@"%@ %@", self.resultLabel.text, tmp);
+    self.resultLabel.text = [self.calculatorModel addOperator:ADD andLabelText:self.resultLabel.text];
 }
 
 - (IBAction)subtractButtonDidTouch:(UIButton *)sender {
+        self.resultLabel.text = [self.calculatorModel addOperator:SUBTRACT andLabelText:self.resultLabel.text];
 }
 
 - (IBAction)multiplicationButtonDidTouch:(UIButton *)sender {
+        self.resultLabel.text = [self.calculatorModel addOperator:MULTIPLY andLabelText:self.resultLabel.text];
 }
 
 - (IBAction)divisionButtonDidTouch:(UIButton *)sender {
+        self.resultLabel.text = [self.calculatorModel addOperator:DIVIDE andLabelText:self.resultLabel.text];
 }
 
 - (IBAction)equalButtonDidTouch:(UIButton *)sender {
