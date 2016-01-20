@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EvaluationModel.h"
 
 @interface CalculatorFSMModel : NSObject
 typedef NS_ENUM(NSUInteger, CalculatorState) {

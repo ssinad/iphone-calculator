@@ -13,10 +13,15 @@
 @property NSDecimalNumber * result;
 @property CalculatorOperator lastOperator;
 @property NSDecimalNumber * lastOperand;
+//@property NSString * evalString;
+@property EvaluationModel * evaluationModel;
 -(NSString *)evaluateWithOperand: operand;
+
+
 @end
 
 @implementation CalculatorFSMModel
+
 
 
 -(void)resetAll{
@@ -24,6 +29,8 @@
     self.result = [NSDecimalNumber decimalNumberWithString:@"0"];
     self.lastOperand = nil;
     self.lastOperator = N;
+    self.evaluationModel = [[EvaluationModel alloc]init];
+//    self.evalString = @"";
 }
 
 - (id)init
@@ -90,28 +97,33 @@
             break;
             
         case CalculatorStateEnteringFirstNumber:
-            self.state = CalculatorStateFirstOperatorSelected;
+//            self.state = CalculatorStateFirstOperatorSelected;
             self.lastOperand = number;
-            self.result = number;
+            [self.evaluationModel addOperand:number];
+//            self.result = number;
+            [self.evaluationModel addCalculatorOperator:calculatorOperator];
             self.lastOperator = calculatorOperator;
+            
             break;
             
         case CalculatorStateEnteringNumber:
             self.state = CalculatorStateOperatorSelected;
             self.lastOperand = number;
-            temporaryResult = [self evaluateWithOperand: self.lastOperand];
+//            temporaryResult = [self evaluateWithOperand: self.lastOperand];
             self.lastOperator = calculatorOperator;
             break;
             
         case CalculatorStateFirstOperatorSelected:
             self.state = CalculatorStateFirstOperatorSelected;
-            self.lastOperand = number;
+//            self.lastOperand = number;
             self.lastOperator = calculatorOperator;
+            [self.evaluationModel replaceOperator:calculatorOperator];
             break;
             
         case CalculatorStateOperatorSelected:
             self.state = CalculatorStateOperatorSelected;
             self.lastOperator = calculatorOperator;
+            temporaryResult = [self.evaluationModel replaceOperator:calculatorOperator];
             break;
             
         case CalculatorStateEqual:
@@ -140,72 +152,65 @@
         case CalculatorStateEnteringFirstNumber:
             self.state = CalculatorStateEnteringFirstNumber;
             
-            
-//            self.lastOperator = calculatorOperator;
             break;
             
         case CalculatorStateEnteringNumber:
             self.state = CalculatorStateEqual;
             self.lastOperand = number;
-            temporaryResult = [self evaluateWithOperand: self.lastOperand];
-            
-            
-//            self.lastOperator = calculatorOperator;
+//            temporaryResult = [self evaluateWithOperand: self.lastOperand];
             break;
             
         case CalculatorStateFirstOperatorSelected:
             self.state = CalculatorStateEqual;
             self.lastOperand = number;
             self.result = number;
-            temporaryResult = [self evaluateWithOperand: self.result];
-//            self.lastOperator = calculatorOperator;
+//            temporaryResult = [self evaluateWithOperand: self.result];
             break;
             
         case CalculatorStateOperatorSelected:
             self.state = CalculatorStateEqual;
-            self.lastOperand = number;
-            temporaryResult = [self evaluateWithOperand: self.result];
-//            self.lastOperator = calculatorOperator;
+//            self.lastOperand = number;
+//            temporaryResult = [self evaluateWithOperand: self.result];
             break;
             
         case CalculatorStateEqual:
-            //self.lastOperand = number;
-            temporaryResult = [self evaluateWithOperand: self.lastOperand];
-//            self.state = CalculatorStateEqual;
-//            self.lastOperand = number;
-//            self.lastOperator = calculatorOperator;
+            self.lastOperand = number;
+//            temporaryResult = [self evaluateWithOperand: self.lastOperand];
+            self.state = CalculatorStateEqual;
+            self.lastOperand = number;
             break;
             
         default:
             break;
     }
+    
     NSLog(@"%@", temporaryResult);
-    return temporaryResult;
+    return [self.evaluationModel evaluateAll];
 }
 
--(NSString *)evaluateWithOperand: (NSDecimalNumber *) operand{
-    NSLog(@"%ld %@ %@", (long)self.lastOperator, self.result, operand);
-    switch (self.lastOperator) {
-        case ADD:
-            self.result = [self.result decimalNumberByAdding:operand];
-            break;
-        case SUBTRACT:
-            self.result = [self.result decimalNumberBySubtracting:operand];
-            break;
-        case MULTIPLY:
-            self.result = [self.result decimalNumberByMultiplyingBy:operand];
-            break;
-        case DIVIDE:
-            if ([self.lastOperand compare:@(0)] == NSOrderedSame){
-                return @"Division By Zero";
-            }
-            self.result = [self.result decimalNumberByDividingBy:operand];
-            break;
-        default:
-            break;
-    }
-    return [NSString stringWithFormat:@"%@", self.result];
-}
+//-(NSString *)evaluateWithOperand: (NSDecimalNumber *) operand{
+//    NSLog(@"%ld %@ %@", (long)self.lastOperator, self.result, operand);
+//    switch (self.lastOperator) {
+//        case ADD:
+//            self.result = [self.result decimalNumberByAdding:operand];
+//            break;
+//        case SUBTRACT:
+//            self.result = [self.result decimalNumberBySubtracting:operand];
+//            break;
+//        case MULTIPLY:
+//            self.result = [self.result decimalNumberByMultiplyingBy:operand];
+//            break;
+//        case DIVIDE:
+//            if ([self.lastOperand compare:@(0)] == NSOrderedSame){
+//                return @"Division By Zero";
+//            }
+//            self.result = [self.result decimalNumberByDividingBy:operand];
+//            break;
+//        default:
+//            break;
+//    }
+//    return [NSString stringWithFormat:@"%@", self.result];
+//}
 
 
 @end
