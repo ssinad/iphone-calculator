@@ -58,9 +58,9 @@
 -(NSDecimalNumber*) popFromStacks{
     CalculatorOperator calculatorOperator = [self.operators.lastObject intValue];
     [self.operators removeLastObject];
-    NSDecimalNumber* a = self.operands.lastObject;
-    [self.operands removeLastObject];
     NSDecimalNumber* b = self.operands.lastObject;
+    [self.operands removeLastObject];
+    NSDecimalNumber* a = self.operands.lastObject;
     [self.operands removeLastObject];
     NSDecimalNumber* c = [self calculateFirstOperand:a calculatorOperator:calculatorOperator secondOperator:b];
     [self.operands addObject:c];
