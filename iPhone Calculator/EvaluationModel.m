@@ -13,8 +13,8 @@
 @property NSMutableArray<NSNumber *> * operators;
 @property NSMutableArray<NSDecimalNumber *> * operands;
 @property NSString * evalString;
-@property CalculatorOperator lastOperator;
-@property NSDecimalNumber * lastOperand;
+//@property CalculatorOperator lastOperator;
+//@property NSDecimalNumber * lastOperand;
 @property NSDecimalNumber * result;
 
 -(BOOL)shouldPushIntoOperatorStack:(CalculatorOperator) calculatorOperator;
@@ -35,7 +35,7 @@
 
 -(void)addOperand:(NSDecimalNumber *)operand{
     [self.operands addObject:operand];
-    self.lastOperand = operand;
+//    self.lastOperand = operand;
 }
 
 -(NSString *)replaceOperator:(NSUInteger) calculatorOperator{
@@ -50,7 +50,8 @@
         temporaryResult = [self popFromStacks];
     }
     [self.operators addObject:@(calculatorOperator)];
-    self.lastOperator = calculatorOperator;
+//    self.lastOperator = calculatorOperator;
+    NSLog(@"%@", temporaryResult);
     return [temporaryResult stringValue];
 }
 
@@ -82,7 +83,12 @@
 
 
 -(BOOL)shouldPushIntoOperatorStack:(CalculatorOperator)calculatorOperator{
-    return (([self.operators.lastObject isEqualToNumber:@(MULTIPLY)] || [self.operators.lastObject isEqualToNumber:@(DIVIDE)]) && ([self.operators.lastObject isEqualToNumber:@(ADD)] || [self.operators.lastObject isEqualToNumber:@(SUBTRACT)]));
+    if (self.operators.count == 0)
+        return YES;
+    if (( calculatorOperator == MULTIPLY || calculatorOperator == DIVIDE) && ([self.operators.lastObject isEqualToNumber:@(ADD)] || [self.operators.lastObject isEqualToNumber:@(SUBTRACT)])){
+        return YES;
+    }
+    return NO;
 }
 
 

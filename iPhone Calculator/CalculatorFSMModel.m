@@ -23,7 +23,6 @@
 @implementation CalculatorFSMModel
 
 
-
 -(void)resetAll{
     self.state = CalculatorStateInitial;
     self.result = [NSDecimalNumber decimalNumberWithString:@"0"];
@@ -97,7 +96,7 @@
             break;
             
         case CalculatorStateEnteringFirstNumber:
-//            self.state = CalculatorStateFirstOperatorSelected;
+            self.state = CalculatorStateFirstOperatorSelected;
             self.lastOperand = number;
             [self.evaluationModel addOperand:number];
 //            self.result = number;
@@ -109,8 +108,10 @@
         case CalculatorStateEnteringNumber:
             self.state = CalculatorStateOperatorSelected;
             self.lastOperand = number;
+            [self.evaluationModel addOperand:number];
 //            temporaryResult = [self evaluateWithOperand: self.lastOperand];
             self.lastOperator = calculatorOperator;
+            temporaryResult = [self.evaluationModel addCalculatorOperator:calculatorOperator];
             break;
             
         case CalculatorStateFirstOperatorSelected:
@@ -128,7 +129,7 @@
             
         case CalculatorStateEqual:
             self.state = CalculatorStateOperatorSelected;
-            self.lastOperand = number;
+//            self.lastOperand = number;
             self.lastOperator = calculatorOperator;
             break;
             
@@ -157,27 +158,35 @@
         case CalculatorStateEnteringNumber:
             self.state = CalculatorStateEqual;
             self.lastOperand = number;
+            [self.evaluationModel addOperand:number];
+            temporaryResult = [self.evaluationModel evaluateAll];
 //            temporaryResult = [self evaluateWithOperand: self.lastOperand];
             break;
             
         case CalculatorStateFirstOperatorSelected:
             self.state = CalculatorStateEqual;
             self.lastOperand = number;
-            self.result = number;
+            [self.evaluationModel addOperand:number];
+            temporaryResult = [self.evaluationModel evaluateAll];
 //            temporaryResult = [self evaluateWithOperand: self.result];
             break;
             
         case CalculatorStateOperatorSelected:
             self.state = CalculatorStateEqual;
-//            self.lastOperand = number;
+            self.lastOperand = number;
+            [self.evaluationModel addOperand:number];
+            temporaryResult = [self.evaluationModel evaluateAll];
 //            temporaryResult = [self evaluateWithOperand: self.result];
             break;
             
         case CalculatorStateEqual:
-            self.lastOperand = number;
+//            self.lastOperand = number;
 //            temporaryResult = [self evaluateWithOperand: self.lastOperand];
             self.state = CalculatorStateEqual;
-            self.lastOperand = number;
+            [self.evaluationModel addOperand:number];
+            [self.evaluationModel addCalculatorOperator:self.lastOperator];
+            temporaryResult = [self.evaluationModel evaluateAll];
+//            self.lastOperand = number;
             break;
             
         default:
@@ -185,7 +194,7 @@
     }
     
     NSLog(@"%@", temporaryResult);
-    return [self.evaluationModel evaluateAll];
+    return temporaryResult;
 }
 
 //-(NSString *)evaluateWithOperand: (NSDecimalNumber *) operand{
