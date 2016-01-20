@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CalculatorModel : NSObject
+@interface CalculatorFSMModel : NSObject
 typedef NS_ENUM(NSUInteger, CalculatorState) {
     CalculatorStateInitial,
     CalculatorStateEnteringFirstNumber,
@@ -25,7 +25,9 @@ typedef NS_ENUM(NSUInteger, CalculatorOperator) {
     DIVIDE = 3
 };
 @property (readonly) CalculatorState state;
+
 -(void)addCharacter:(NSString *) character;
 -(NSString *)addOperator:(CalculatorOperator) calculatorOperator andLabelText: (NSString *) number;
 -(void)resetAll;
+-(NSString *)equalEvaluateWithLabelText: (NSString *) labelText;
 @end

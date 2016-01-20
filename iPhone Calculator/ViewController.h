@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CalculatorModel.h"
+#import "CalculatorFSMModel.h"
 
 @interface ViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (weak, nonatomic) IBOutlet UIButton *clearButton;
-@property CalculatorModel * calculatorModel;
+@property CalculatorFSMModel * calculatorFSMModel;
 
 - (IBAction)clearResultLabel:(UIButton *)sender;
 - (IBAction)numberButtonDidTouch:(UIButton *)sender;

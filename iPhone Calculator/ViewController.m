@@ -7,31 +7,42 @@
 //
 
 #import "ViewController.h"
-#import "CalculatorModel.h"
+#import "CalculatorFSMModel.h"
 
 @interface ViewController ()
 -(void)setResultLabelText:(NSString*) number;
+typedef NS_ENUM(NSUInteger, CalculatorViewState) {
+    CalculatorViewInitial,
+    CalculatorViewEnteringNumber,
+    CalculatorViewOperatorDidSelect,
+    CalculatorViewEqualDidPress
+};
+@property CalculatorViewState viewState;
 @end
 
 @implementation ViewController
 - (IBAction)clearResultLabel:(UIButton *)sender {
     self.resultLabel.text = @"0";
     [self.clearButton setTitle:@"AC" forState:UIControlStateNormal];
+    [self.calculatorFSMModel resetAll];
+    self.viewState = CalculatorViewInitial;
 }
 -(void)setResultLabelText:(NSString *)number{
-    if ([self.resultLabel.text isEqualToString:@"0"]){
+    if ([self.resultLabel.text isEqualToString:@"0"] || self.viewState == CalculatorViewEqualDidPress || self.viewState == CalculatorViewOperatorDidSelect){
         self.resultLabel.text = number;
     }
     else{
         self.resultLabel.text = [self.resultLabel.text stringByAppendingString:number];
     }
-    
+    self.viewState = CalculatorViewEnteringNumber;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSExpression * expression = [NSExpression expressionWithFormat:@"2.1+2"];
     NSNumber *result = [expression expressionValueWithObject:nil context:nil];
     NSLog(@"%@", result);
+    self.viewState = CalculatorViewInitial;
+    self.calculatorFSMModel = [[CalculatorFSMModel alloc]init];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -43,19 +54,25 @@
 
 
 - (IBAction)numberButtonDidTouch:(UIButton *)sender {
+    [self.clearButton setTitle:@"C" forState:UIControlStateNormal];
     [self setResultLabelText:sender.titleLabel.text];
-    [self.calculatorModel addCharacter:sender.titleLabel.text];
+    [self.calculatorFSMModel addCharacter:sender.titleLabel.text];
 //    if (![sender.titleLabel.text isEqualToString:@"0"])
 //        [self.clearButton setTitle:@"C" forState:UIControlStateNormal];
     
 }
 
 - (IBAction)pointButtonDidTouch:(UIButton *)sender {
+    [self.clearButton setTitle:@"C" forState:UIControlStateNormal];
+    
+    if (self.viewState == CalculatorViewEqualDidPress || self.viewState == CalculatorViewOperatorDidSelect)
+        self.resultLabel.text = @"0";
     if (! [self.resultLabel.text containsString:@"."]){
         self.resultLabel.text = [self.resultLabel.text stringByAppendingString:@"."];
-        [self.calculatorModel addCharacter:sender.titleLabel.text];
+        [self.calculatorFSMModel addCharacter:sender.titleLabel.text];
     }
     
+    self.viewState = CalculatorViewEnteringNumber;
 }
 - (IBAction)negationButtonDidTouch:(UIButton *)sender {
     if ([self.resultLabel.text containsString:@"-"]) {
@@ -64,28 +81,32 @@
     else{
         self.resultLabel.text = [@"-" stringByAppendingString:self.resultLabel.text];
     }
-    [self.calculatorModel addCharacter:@"-"];
+    [self.calculatorFSMModel addCharacter:@"-"];
 }
 
 - (IBAction)addButtonDidTouch:(UIButton *)sender {
-    NSString * tmp = @"2";
-    NSLog(@"%@ %@", self.resultLabel.text, tmp);
-    self.resultLabel.text = [self.calculatorModel addOperator:ADD andLabelText:self.resultLabel.text];
+    self.resultLabel.text = [self.calculatorFSMModel addOperator:ADD andLabelText:self.resultLabel.text];
+    self.viewState = CalculatorViewOperatorDidSelect;
 }
 
 - (IBAction)subtractButtonDidTouch:(UIButton *)sender {
-        self.resultLabel.text = [self.calculatorModel addOperator:SUBTRACT andLabelText:self.resultLabel.text];
+        self.resultLabel.text = [self.calculatorFSMModel addOperator:SUBTRACT andLabelText:self.resultLabel.text];
+    self.viewState = CalculatorViewOperatorDidSelect;
 }
 
 - (IBAction)multiplicationButtonDidTouch:(UIButton *)sender {
-        self.resultLabel.text = [self.calculatorModel addOperator:MULTIPLY andLabelText:self.resultLabel.text];
+        self.resultLabel.text = [self.calculatorFSMModel addOperator:MULTIPLY andLabelText:self.resultLabel.text];
+    self.viewState = CalculatorViewOperatorDidSelect;
 }
 
 - (IBAction)divisionButtonDidTouch:(UIButton *)sender {
-        self.resultLabel.text = [self.calculatorModel addOperator:DIVIDE andLabelText:self.resultLabel.text];
+        self.resultLabel.text = [self.calculatorFSMModel addOperator:DIVIDE andLabelText:self.resultLabel.text];
+    self.viewState = CalculatorViewOperatorDidSelect;
 }
 
 - (IBAction)equalButtonDidTouch:(UIButton *)sender {
+    self.viewState = CalculatorViewEqualDidPress;
+    self.resultLabel.text = [self.calculatorFSMModel equalEvaluateWithLabelText:self.resultLabel.text];
 }
 
 

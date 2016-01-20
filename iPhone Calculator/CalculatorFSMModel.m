@@ -6,9 +6,9 @@
 //  Copyright © 1394 SS D. All rights reserved.
 //
 
-#import "CalculatorModel.h"
+#import "CalculatorFSMModel.h"
 
-@interface CalculatorModel ()
+@interface CalculatorFSMModel ()
 @property CalculatorState state;
 @property NSDecimalNumber * result;
 @property CalculatorOperator lastOperator;
@@ -16,7 +16,7 @@
 -(NSString *)evaluateWithOperand: operand;
 @end
 
-@implementation CalculatorModel
+@implementation CalculatorFSMModel
 
 
 -(void)resetAll{
@@ -56,7 +56,7 @@
 //        default:
 //            break;
 //    }
-    NSLog(@"character %@ was pressed", character);
+
     switch (self.state) {
         case CalculatorStateInitial:
             self.state = CalculatorStateEnteringFirstNumber;
@@ -83,7 +83,7 @@
 -(NSString *)addOperator:(CalculatorOperator)calculatorOperator andLabelText: (NSString *) labelText{
     NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithString:labelText];
     NSString * temporaryResult = [NSString stringWithString:labelText];
-    NSLog(@"%@ %@ %@", temporaryResult, number, labelText);
+//    NSLog(@"%@ %@ %@", temporaryResult, number, labelText);
     switch (self.state) {
         case CalculatorStateInitial:
             self.state = CalculatorStateInitial;
@@ -92,6 +92,8 @@
         case CalculatorStateEnteringFirstNumber:
             self.state = CalculatorStateFirstOperatorSelected;
             self.lastOperand = number;
+            self.result = number;
+            self.lastOperator = calculatorOperator;
             break;
             
         case CalculatorStateEnteringNumber:
@@ -124,7 +126,65 @@
     NSLog(@"%@", temporaryResult);
     return temporaryResult;
 }
+
+
+-(NSString *)equalEvaluateWithLabelText:(NSString *)labelText{
+    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithString:labelText];
+    NSString * temporaryResult = [NSString stringWithString:labelText];
+    //    NSLog(@"%@ %@ %@", temporaryResult, number, labelText);
+    switch (self.state) {
+        case CalculatorStateInitial:
+            self.state = CalculatorStateInitial;
+            break;
+            
+        case CalculatorStateEnteringFirstNumber:
+            self.state = CalculatorStateEnteringFirstNumber;
+            
+            
+//            self.lastOperator = calculatorOperator;
+            break;
+            
+        case CalculatorStateEnteringNumber:
+            self.state = CalculatorStateEqual;
+            self.lastOperand = number;
+            temporaryResult = [self evaluateWithOperand: self.lastOperand];
+            
+            
+//            self.lastOperator = calculatorOperator;
+            break;
+            
+        case CalculatorStateFirstOperatorSelected:
+            self.state = CalculatorStateEqual;
+            self.lastOperand = number;
+            self.result = number;
+            temporaryResult = [self evaluateWithOperand: self.result];
+//            self.lastOperator = calculatorOperator;
+            break;
+            
+        case CalculatorStateOperatorSelected:
+            self.state = CalculatorStateEqual;
+            self.lastOperand = number;
+            temporaryResult = [self evaluateWithOperand: self.result];
+//            self.lastOperator = calculatorOperator;
+            break;
+            
+        case CalculatorStateEqual:
+            //self.lastOperand = number;
+            temporaryResult = [self evaluateWithOperand: self.lastOperand];
+//            self.state = CalculatorStateEqual;
+//            self.lastOperand = number;
+//            self.lastOperator = calculatorOperator;
+            break;
+            
+        default:
+            break;
+    }
+    NSLog(@"%@", temporaryResult);
+    return temporaryResult;
+}
+
 -(NSString *)evaluateWithOperand: (NSDecimalNumber *) operand{
+    NSLog(@"%ld %@ %@", (long)self.lastOperator, self.result, operand);
     switch (self.lastOperator) {
         case ADD:
             self.result = [self.result decimalNumberByAdding:operand];
