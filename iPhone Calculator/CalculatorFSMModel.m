@@ -80,7 +80,8 @@
             self.state = CalculatorStateEnteringNumber;
             break;
         case CalculatorStateEqual:
-            self.state = CalculatorStateEnteringNumber;
+            self.state = CalculatorStateEnteringFirstNumber;
+            self.evaluationModel = [[EvaluationModel alloc]init];
             break;
         default:
             break;
