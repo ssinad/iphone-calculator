@@ -140,10 +140,6 @@ ERcSw5c
                                     <action selector="equalButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QMZ-jL-qFf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01S-BO-oQa">
-                                <rect key="frame" x="112" y="49" width="30" height="30"/>
-                                <state key="normal" title="%"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73S-WV-Md0">
                                 <rect key="frame" x="66" y="49" width="30" height="30"/>
                                 <state key="normal" title="±"/>
@@ -156,6 +152,13 @@ ERcSw5c
                                 <state key="normal" title="AC"/>
                                 <connections>
                                     <action selector="clearResultLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HZg-JL-Nvz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8k-W3-5Sr">
+                                <rect key="frame" x="112" y="49" width="30" height="30"/>
+                                <state key="normal" title="Del"/>
+                                <connections>
+                                    <action selector="deleteButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MEK-0d-ST3"/>
                                 </connections>
                             </button>
                         </subviews>

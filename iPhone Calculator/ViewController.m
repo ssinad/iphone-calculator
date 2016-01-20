@@ -51,6 +51,15 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)deleteButtonDidTouch:(UIButton *)sender {
+    unsigned long length = self.resultLabel.text.length;
+    if (length > 1){
+        self.resultLabel.text = [self.resultLabel.text substringToIndex:length - 1];
+    }
+    else{
+        self.resultLabel.text = @"0";
+    }
+}
 
 
 - (IBAction)numberButtonDidTouch:(UIButton *)sender {

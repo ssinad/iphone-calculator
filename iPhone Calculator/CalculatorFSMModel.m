@@ -15,7 +15,7 @@
 @property NSDecimalNumber * lastOperand;
 //@property NSString * evalString;
 @property EvaluationModel * evaluationModel;
--(NSString *)evaluateWithOperand: operand;
+//-(NSString *)evaluateWithOperand: operand;
 
 
 @end

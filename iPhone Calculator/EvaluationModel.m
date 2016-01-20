@@ -19,7 +19,7 @@
 
 -(BOOL)shouldPushIntoOperatorStack:(CalculatorOperator) calculatorOperator;
 -(NSDecimalNumber *) calculateFirstOperand:(NSDecimalNumber *) a calculatorOperator:(CalculatorOperator)calculatorOperator secondOperator: (NSDecimalNumber*) b;
--(NSString *)evaluateWithOperand: operand;
+//-(NSString *)evaluateWithOperand: operand;
 
 @end
 
