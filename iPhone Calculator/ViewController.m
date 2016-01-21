@@ -44,9 +44,15 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     NSLog(@"%@", result);
     self.viewState = CalculatorViewInitial;
     self.calculatorFSMModel = [[CalculatorFSMModel alloc]init];
-    [[self.ACButton layer] setBorderWidth:1.0f];
-    [[self.ACButton layer] setBorderColor:[UIColor blackColor].CGColor];
+//    self.ACButton.layer.borderWidth = 1.0f;
+//    self.ACButton.layer.borderColor = [UIColor blackColor].CGColor;
     // Do any additional setup after loading the view, typically from a nib.
+    for (UIButton * button in self.view.subviews){
+        if ([button isKindOfClass:[UIButton class]]) {
+            button.layer.borderWidth = 0.5f;
+            button.layer.borderColor = [UIColor blackColor].CGColor;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
