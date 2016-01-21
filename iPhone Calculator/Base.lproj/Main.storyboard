@@ -217,6 +217,11 @@ ERcSw5c
                                 <state key="normal" title="AC">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="clearResultLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HZg-JL-Nvz"/>
                                 </connections>
@@ -272,6 +277,7 @@ ERcSw5c
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="ACButton" destination="QiQ-LQ-2qB" id="Zed-6r-heX"/>
                         <outlet property="clearButton" destination="QiQ-LQ-2qB" id="hda-DI-vg9"/>
                         <outlet property="resultLabel" destination="gVc-8F-MDB" id="GAB-D4-UcB"/>
                     </connections>

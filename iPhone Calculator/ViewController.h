@@ -23,6 +23,7 @@
 - (IBAction)multiplicationButtonDidTouch:(UIButton *)sender;
 - (IBAction)divisionButtonDidTouch:(UIButton *)sender;
 - (IBAction)equalButtonDidTouch:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UIButton *ACButton;
 
 @end
 

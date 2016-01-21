@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "CalculatorFSMModel.h"
+//#import <QuartzCore/QuartzCore.h>
 
 @interface ViewController ()
 -(void)setResultLabelText:(NSString*) number;
@@ -43,6 +44,8 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     NSLog(@"%@", result);
     self.viewState = CalculatorViewInitial;
     self.calculatorFSMModel = [[CalculatorFSMModel alloc]init];
+    [[self.ACButton layer] setBorderWidth:1.0f];
+    [[self.ACButton layer] setBorderColor:[UIColor blackColor].CGColor];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
