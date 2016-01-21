@@ -91,53 +91,61 @@
     NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithString:labelText];
     NSString * temporaryResult = [NSString stringWithString:labelText];
 //    NSLog(@"%@ %@ %@", temporaryResult, number, labelText);
-    switch (self.state) {
-        case CalculatorStateInitial:
-            self.state = CalculatorStateInitial;
-            break;
-            
-        case CalculatorStateEnteringFirstNumber:
-            self.state = CalculatorStateFirstOperatorSelected;
-            self.lastOperand = number;
-            [self.evaluationModel addOperand:number];
-//            self.result = number;
-            [self.evaluationModel addCalculatorOperator:calculatorOperator];
-            self.lastOperator = calculatorOperator;
-            
-            break;
-            
-        case CalculatorStateEnteringNumber:
-            self.state = CalculatorStateOperatorSelected;
-            self.lastOperand = number;
-            [self.evaluationModel addOperand:number];
-//            temporaryResult = [self evaluateWithOperand: self.lastOperand];
-            self.lastOperator = calculatorOperator;
-            temporaryResult = [self.evaluationModel addCalculatorOperator:calculatorOperator];
-            break;
-            
-        case CalculatorStateFirstOperatorSelected:
-            self.state = CalculatorStateFirstOperatorSelected;
-//            self.lastOperand = number;
-            self.lastOperator = calculatorOperator;
-            [self.evaluationModel replaceOperator:calculatorOperator];
-            break;
-            
-        case CalculatorStateOperatorSelected:
-            self.state = CalculatorStateOperatorSelected;
-            self.lastOperator = calculatorOperator;
-            temporaryResult = [self.evaluationModel replaceOperator:calculatorOperator];
-            break;
-            
-        case CalculatorStateEqual:
-            self.state = CalculatorStateOperatorSelected;
-//            self.lastOperand = number;
-            self.lastOperator = calculatorOperator;
-            break;
-            
-        default:
-            break;
+    @try {
+        switch (self.state) {
+            case CalculatorStateInitial:
+                self.state = CalculatorStateInitial;
+                break;
+                
+            case CalculatorStateEnteringFirstNumber:
+                self.state = CalculatorStateFirstOperatorSelected;
+                self.lastOperand = number;
+                [self.evaluationModel addOperand:number];
+                //            self.result = number;
+                [self.evaluationModel addCalculatorOperator:calculatorOperator];
+                self.lastOperator = calculatorOperator;
+                
+                break;
+                
+            case CalculatorStateEnteringNumber:
+                self.state = CalculatorStateOperatorSelected;
+                self.lastOperand = number;
+                [self.evaluationModel addOperand:number];
+                //            temporaryResult = [self evaluateWithOperand: self.lastOperand];
+                self.lastOperator = calculatorOperator;
+                temporaryResult = [self.evaluationModel addCalculatorOperator:calculatorOperator];
+                break;
+                
+            case CalculatorStateFirstOperatorSelected:
+                self.state = CalculatorStateFirstOperatorSelected;
+                //            self.lastOperand = number;
+                self.lastOperator = calculatorOperator;
+                [self.evaluationModel replaceOperator:calculatorOperator];
+                break;
+                
+            case CalculatorStateOperatorSelected:
+                self.state = CalculatorStateOperatorSelected;
+                self.lastOperator = calculatorOperator;
+                temporaryResult = [self.evaluationModel replaceOperator:calculatorOperator];
+                break;
+                
+            case CalculatorStateEqual:
+                self.state = CalculatorStateOperatorSelected;
+                self.lastOperand = number;
+                self.lastOperator = calculatorOperator;
+                temporaryResult = [self.evaluationModel addCalculatorOperator:calculatorOperator];
+                break;
+                
+            default:
+                break;
+        }
+        NSLog(@"%@", temporaryResult);
     }
-    NSLog(@"%@", temporaryResult);
+    @catch (NSException *exception) {
+        return @"Error";
+    }
+    
+    
     return temporaryResult;
 }
 
@@ -146,55 +154,62 @@
     NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithString:labelText];
     NSString * temporaryResult = [NSString stringWithString:labelText];
     //    NSLog(@"%@ %@ %@", temporaryResult, number, labelText);
-    switch (self.state) {
-        case CalculatorStateInitial:
-            self.state = CalculatorStateInitial;
-            break;
-            
-        case CalculatorStateEnteringFirstNumber:
-            self.state = CalculatorStateEnteringFirstNumber;
-            
-            break;
-            
-        case CalculatorStateEnteringNumber:
-            self.state = CalculatorStateEqual;
-            self.lastOperand = number;
-            [self.evaluationModel addOperand:number];
-            temporaryResult = [self.evaluationModel evaluateAll];
-//            temporaryResult = [self evaluateWithOperand: self.lastOperand];
-            break;
-            
-        case CalculatorStateFirstOperatorSelected:
-            self.state = CalculatorStateEqual;
-            self.lastOperand = number;
-            [self.evaluationModel addOperand:number];
-            temporaryResult = [self.evaluationModel evaluateAll];
-//            temporaryResult = [self evaluateWithOperand: self.result];
-            break;
-            
-        case CalculatorStateOperatorSelected:
-            self.state = CalculatorStateEqual;
-            self.lastOperand = number;
-            [self.evaluationModel addOperand:number];
-            temporaryResult = [self.evaluationModel evaluateAll];
-//            temporaryResult = [self evaluateWithOperand: self.result];
-            break;
-            
-        case CalculatorStateEqual:
-//            self.lastOperand = number;
-//            temporaryResult = [self evaluateWithOperand: self.lastOperand];
-            self.state = CalculatorStateEqual;
-            [self.evaluationModel addOperand:number];
-            [self.evaluationModel addCalculatorOperator:self.lastOperator];
-            temporaryResult = [self.evaluationModel evaluateAll];
-//            self.lastOperand = number;
-            break;
-            
-        default:
-            break;
+    @try {
+        switch (self.state) {
+            case CalculatorStateInitial:
+                self.state = CalculatorStateInitial;
+                break;
+                
+            case CalculatorStateEnteringFirstNumber:
+                self.state = CalculatorStateEnteringFirstNumber;
+                
+                break;
+                
+            case CalculatorStateEnteringNumber:
+                self.state = CalculatorStateEqual;
+                self.lastOperand = number;
+                [self.evaluationModel addOperand:number];
+                temporaryResult = [self.evaluationModel evaluateAll];
+                //            temporaryResult = [self evaluateWithOperand: self.lastOperand];
+                break;
+                
+            case CalculatorStateFirstOperatorSelected:
+                self.state = CalculatorStateEqual;
+                self.lastOperand = number;
+                [self.evaluationModel addOperand:number];
+                temporaryResult = [self.evaluationModel evaluateAll];
+                //            temporaryResult = [self evaluateWithOperand: self.result];
+                break;
+                
+            case CalculatorStateOperatorSelected:
+                self.state = CalculatorStateEqual;
+                self.lastOperand = number;
+                [self.evaluationModel addOperand:number];
+                temporaryResult = [self.evaluationModel evaluateAll];
+                //            temporaryResult = [self evaluateWithOperand: self.result];
+                break;
+                
+            case CalculatorStateEqual:
+                //            self.lastOperand = number;
+                //            temporaryResult = [self evaluateWithOperand: self.lastOperand];
+                self.state = CalculatorStateEqual;
+                [self.evaluationModel addOperand:self.lastOperand];
+                [self.evaluationModel addCalculatorOperator:self.lastOperator];
+                temporaryResult = [self.evaluationModel evaluateAll];
+                //            self.lastOperand = number;
+                break;
+                
+            default:
+                break;
+        }
+        
+        NSLog(@"%@", temporaryResult);
+
+    }
+    @catch (NSException *exception) {
+        return @"Error";
     }
     
-    NSLog(@"%@", temporaryResult);
     return temporaryResult;
 }
 
