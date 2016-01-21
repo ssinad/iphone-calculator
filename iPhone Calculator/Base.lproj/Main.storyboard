@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,95 +15,95 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrl-Qv-eeS">
-                                <rect key="frame" x="20" y="87" width="30" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVc-8F-MDB">
+                                <rect key="frame" x="20" y="20" width="984" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrl-Qv-eeS">
+                                <rect key="frame" x="837" y="87" width="30" height="30"/>
                                 <state key="normal" title="7"/>
                                 <connections>
                                     <action selector="numberButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rdr-uy-oUp"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVc-8F-MDB">
-                                <rect key="frame" x="20" y="20" width="271" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBg-9o-fJf">
-                                <rect key="frame" x="66" y="87" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBg-9o-fJf">
+                                <rect key="frame" x="883" y="87" width="30" height="30"/>
                                 <state key="normal" title="8"/>
                                 <connections>
                                     <action selector="numberButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x7E-o2-9Kp"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsK-k4-5ug">
-                                <rect key="frame" x="112" y="87" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsK-k4-5ug">
+                                <rect key="frame" x="929" y="87" width="30" height="30"/>
                                 <state key="normal" title="9"/>
                                 <connections>
                                     <action selector="numberButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KtD-BM-MgQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWj-jp-xd5">
-                                <rect key="frame" x="20" y="125" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bWj-jp-xd5">
+                                <rect key="frame" x="837" y="125" width="30" height="30"/>
                                 <state key="normal" title="4"/>
                                 <connections>
                                     <action selector="numberButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ldf-jj-bcg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YH9-I4-zUL">
-                                <rect key="frame" x="66" y="125" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YH9-I4-zUL">
+                                <rect key="frame" x="883" y="125" width="30" height="30"/>
                                 <state key="normal" title="5"/>
                                 <connections>
                                     <action selector="numberButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lAe-Wx-q5D"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBF-22-lI4">
-                                <rect key="frame" x="112" y="125" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBF-22-lI4">
+                                <rect key="frame" x="929" y="125" width="30" height="30"/>
                                 <state key="normal" title="6"/>
                                 <connections>
                                     <action selector="numberButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9y1-m4-2al"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDW-mK-wT9">
-                                <rect key="frame" x="20" y="163" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDW-mK-wT9">
+                                <rect key="frame" x="837" y="163" width="30" height="30"/>
                                 <state key="normal" title="1"/>
                                 <connections>
                                     <action selector="numberButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ak4-xh-XpI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P33-Cg-5LV">
-                                <rect key="frame" x="66" y="163" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P33-Cg-5LV">
+                                <rect key="frame" x="883" y="163" width="30" height="30"/>
                                 <state key="normal" title="2"/>
                                 <connections>
                                     <action selector="numberButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rKi-kn-qPe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEX-2Q-2dm">
-                                <rect key="frame" x="112" y="163" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEX-2Q-2dm">
+                                <rect key="frame" x="929" y="163" width="30" height="30"/>
                                 <state key="normal" title="3"/>
                                 <connections>
                                     <action selector="numberButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nlh-0h-U07"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FX2-id-glr">
-                                <rect key="frame" x="20" y="201" width="90" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FX2-id-glr">
+                                <rect key="frame" x="837" y="201" width="90" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="0"/>
                                 <connections>
                                     <action selector="numberButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gWx-o3-38P"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlq-kX-MSi">
-                                <rect key="frame" x="112" y="201" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlq-kX-MSi">
+                                <rect key="frame" x="929" y="201" width="30" height="30"/>
                                 <state key="normal" title="."/>
                                 <connections>
                                     <action selector="pointButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dUN-2q-hgt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiW-vM-LiW">
-                                <rect key="frame" x="157" y="87" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TiW-vM-LiW">
+                                <rect key="frame" x="974" y="87" width="30" height="30"/>
                                 <state key="normal">
                                     <string key="title" base64-UTF8="YES">
 ERcSw5c
@@ -112,50 +113,51 @@ ERcSw5c
                                     <action selector="multiplicationButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ePk-N8-I0K"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNa-qS-cTC">
-                                <rect key="frame" x="157" y="49" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNa-qS-cTC">
+                                <rect key="frame" x="974" y="49" width="30" height="30"/>
+                                <size key="titleShadowOffset" width="17" height="14"/>
                                 <state key="normal" title="÷"/>
                                 <connections>
                                     <action selector="divisionButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SCg-Zb-1Hl"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFN-Y0-Z4z">
-                                <rect key="frame" x="157" y="125" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFN-Y0-Z4z">
+                                <rect key="frame" x="974" y="125" width="30" height="30"/>
                                 <state key="normal" title="-"/>
                                 <connections>
                                     <action selector="subtractButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XyJ-1p-7eV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCR-qw-21F">
-                                <rect key="frame" x="157" y="163" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCR-qw-21F">
+                                <rect key="frame" x="974" y="163" width="30" height="30"/>
                                 <state key="normal" title="+"/>
                                 <connections>
                                     <action selector="addButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DqY-pB-h64"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTe-KI-tIj">
-                                <rect key="frame" x="157" y="201" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTe-KI-tIj">
+                                <rect key="frame" x="974" y="201" width="30" height="30"/>
                                 <state key="normal" title="="/>
                                 <connections>
                                     <action selector="equalButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QMZ-jL-qFf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73S-WV-Md0">
-                                <rect key="frame" x="66" y="49" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="73S-WV-Md0">
+                                <rect key="frame" x="883" y="49" width="30" height="30"/>
                                 <state key="normal" title="±"/>
                                 <connections>
                                     <action selector="negationButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yg4-YQ-8Ge"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QiQ-LQ-2qB">
-                                <rect key="frame" x="20" y="49" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QiQ-LQ-2qB">
+                                <rect key="frame" x="837" y="49" width="30" height="30"/>
                                 <state key="normal" title="AC"/>
                                 <connections>
                                     <action selector="clearResultLabel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HZg-JL-Nvz"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8k-W3-5Sr">
-                                <rect key="frame" x="112" y="49" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8k-W3-5Sr">
+                                <rect key="frame" x="929" y="49" width="30" height="30"/>
                                 <state key="normal" title="Del"/>
                                 <connections>
                                     <action selector="deleteButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MEK-0d-ST3"/>
@@ -163,8 +165,34 @@ ERcSw5c
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OFN-Y0-Z4z" firstAttribute="leading" secondItem="kBF-22-lI4" secondAttribute="trailing" constant="15" id="23I-wL-679"/>
+                            <constraint firstItem="gVc-8F-MDB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="20" id="5mN-Vy-j0R"/>
+                            <constraint firstItem="RsK-k4-5ug" firstAttribute="leading" secondItem="NBg-9o-fJf" secondAttribute="trailing" constant="16" id="ATI-iQ-GmO"/>
+                            <constraint firstItem="gVc-8F-MDB" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" priority="999" id="Aak-Us-quT"/>
+                            <constraint firstItem="bNa-qS-cTC" firstAttribute="leading" secondItem="A8k-W3-5Sr" secondAttribute="trailing" constant="15" id="CVB-Fl-ilf"/>
+                            <constraint firstItem="bNa-qS-cTC" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Ep2-YA-FjJ"/>
+                            <constraint firstItem="JCR-qw-21F" firstAttribute="leading" secondItem="JEX-2Q-2dm" secondAttribute="trailing" constant="15" id="GNw-Ba-8Qw"/>
+                            <constraint firstItem="A8k-W3-5Sr" firstAttribute="leading" secondItem="73S-WV-Md0" secondAttribute="trailing" constant="16" id="Hs1-1Y-usc"/>
+                            <constraint firstItem="kBF-22-lI4" firstAttribute="leading" secondItem="YH9-I4-zUL" secondAttribute="trailing" constant="16" id="KAo-tT-kTO"/>
+                            <constraint firstItem="YH9-I4-zUL" firstAttribute="leading" secondItem="bWj-jp-xd5" secondAttribute="trailing" constant="16" id="MeY-vK-GK4"/>
+                            <constraint firstItem="TiW-vM-LiW" firstAttribute="leading" secondItem="RsK-k4-5ug" secondAttribute="trailing" constant="15" id="N5Z-kU-zWT"/>
+                            <constraint firstItem="rTe-KI-tIj" firstAttribute="leading" secondItem="zlq-kX-MSi" secondAttribute="trailing" constant="15" id="Qz6-ME-uTN"/>
+                            <constraint firstItem="JEX-2Q-2dm" firstAttribute="leading" secondItem="P33-Cg-5LV" secondAttribute="trailing" constant="16" id="VBe-xB-b8U"/>
+                            <constraint firstItem="OFN-Y0-Z4z" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="biD-Gi-LqY"/>
+                            <constraint firstItem="P33-Cg-5LV" firstAttribute="leading" secondItem="XDW-mK-wT9" secondAttribute="trailing" constant="16" id="bti-Nz-Zl5"/>
+                            <constraint firstItem="JCR-qw-21F" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="cIS-uT-E98"/>
+                            <constraint firstItem="gVc-8F-MDB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gic-XO-d0P"/>
+                            <constraint firstItem="73S-WV-Md0" firstAttribute="leading" secondItem="QiQ-LQ-2qB" secondAttribute="trailing" constant="16" id="hDY-mT-2xy"/>
+                            <constraint firstItem="NBg-9o-fJf" firstAttribute="leading" secondItem="qrl-Qv-eeS" secondAttribute="trailing" constant="16" id="hkd-xE-ZLp"/>
+                            <constraint firstItem="TiW-vM-LiW" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="k6a-hL-EYW"/>
+                            <constraint firstItem="zlq-kX-MSi" firstAttribute="leading" secondItem="FX2-id-glr" secondAttribute="trailing" constant="2" id="nbv-Fe-z6i"/>
+                            <constraint firstItem="rTe-KI-tIj" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="uM6-h9-86o"/>
+                            <constraint firstItem="bNa-qS-cTC" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="zuB-AE-DQg"/>
+                        </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="clearButton" destination="QiQ-LQ-2qB" id="hda-DI-vg9"/>
                         <outlet property="resultLabel" destination="gVc-8F-MDB" id="GAB-D4-UcB"/>
