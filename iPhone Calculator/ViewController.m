@@ -142,24 +142,28 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 - (IBAction)addButtonDidTouch:(UIButton *)sender {
     self.resultLabel.text = [self.calculatorFSMModel addOperator:ADD andLabelText:self.resultLabel.text];
     self.viewState = CalculatorViewOperatorDidSelect;
+    [self resetButtonWidths];
     sender.layer.borderWidth = 2.0f;
 }
 
 - (IBAction)subtractButtonDidTouch:(UIButton *)sender {
         self.resultLabel.text = [self.calculatorFSMModel addOperator:SUBTRACT andLabelText:self.resultLabel.text];
     self.viewState = CalculatorViewOperatorDidSelect;
+    [self resetButtonWidths];
     sender.layer.borderWidth = 2.0f;
 }
 
 - (IBAction)multiplicationButtonDidTouch:(UIButton *)sender {
         self.resultLabel.text = [self.calculatorFSMModel addOperator:MULTIPLY andLabelText:self.resultLabel.text];
     self.viewState = CalculatorViewOperatorDidSelect;
+    [self resetButtonWidths];
         sender.layer.borderWidth = 2.0f;
 }
 
 - (IBAction)divisionButtonDidTouch:(UIButton *)sender {
         self.resultLabel.text = [self.calculatorFSMModel addOperator:DIVIDE andLabelText:self.resultLabel.text];
     self.viewState = CalculatorViewOperatorDidSelect;
+    [self resetButtonWidths];
         sender.layer.borderWidth = 2.0f;
 }
 
