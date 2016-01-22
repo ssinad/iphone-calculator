@@ -47,6 +47,12 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 //    self.ACButton.layer.borderWidth = 1.0f;
 //    self.ACButton.layer.borderColor = [UIColor blackColor].CGColor;
     // Do any additional setup after loading the view, typically from a nib.
+    
+}
+-(void)viewDidAppear:(BOOL)animated{
+    
+}
+-(void)viewWillAppear:(BOOL)animated{
     for (UIButton * button in self.view.subviews){
         if ([button isKindOfClass:[UIButton class]]) {
             button.layer.borderWidth = 0.5f;
