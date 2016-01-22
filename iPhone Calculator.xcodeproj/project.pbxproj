@@ -15,7 +15,8 @@
 		5C1484421C4601CA006F92D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C1484401C4601CA006F92D2 /* LaunchScreen.storyboard */; };
 		5C14844D1C4601CA006F92D2 /* iPhone_CalculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C14844C1C4601CA006F92D2 /* iPhone_CalculatorTests.m */; };
 		5C1484581C4601CA006F92D2 /* iPhone_CalculatorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C1484571C4601CA006F92D2 /* iPhone_CalculatorUITests.m */; };
-		5C4F8B841C465B210034295A /* CalculatorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C4F8B831C465B210034295A /* CalculatorModel.m */; };
+		5CD133EE1C4ED387006E4826 /* CalculatorFSMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD133ED1C4ED387006E4826 /* CalculatorFSMModel.m */; };
+		5CF77B5E1C4F71CB00A8C2C6 /* EvaluationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF77B5D1C4F71CB00A8C2C6 /* EvaluationModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +53,10 @@
 		5C1484531C4601CA006F92D2 /* iPhone CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iPhone CalculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C1484571C4601CA006F92D2 /* iPhone_CalculatorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPhone_CalculatorUITests.m; sourceTree = "<group>"; };
 		5C1484591C4601CA006F92D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5C4F8B821C465B210034295A /* CalculatorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorModel.h; sourceTree = "<group>"; };
-		5C4F8B831C465B210034295A /* CalculatorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorModel.m; sourceTree = "<group>"; };
+		5CD133EC1C4ED387006E4826 /* CalculatorFSMModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorFSMModel.h; sourceTree = "<group>"; };
+		5CD133ED1C4ED387006E4826 /* CalculatorFSMModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorFSMModel.m; sourceTree = "<group>"; };
+		5CF77B5C1C4F71CB00A8C2C6 /* EvaluationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationModel.h; sourceTree = "<group>"; };
+		5CF77B5D1C4F71CB00A8C2C6 /* EvaluationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,8 +111,10 @@
 				5C1484361C4601CA006F92D2 /* AppDelegate.m */,
 				5C1484381C4601CA006F92D2 /* ViewController.h */,
 				5C1484391C4601CA006F92D2 /* ViewController.m */,
-				5C4F8B821C465B210034295A /* CalculatorModel.h */,
-				5C4F8B831C465B210034295A /* CalculatorModel.m */,
+				5CD133EC1C4ED387006E4826 /* CalculatorFSMModel.h */,
+				5CD133ED1C4ED387006E4826 /* CalculatorFSMModel.m */,
+				5CF77B5C1C4F71CB00A8C2C6 /* EvaluationModel.h */,
+				5CF77B5D1C4F71CB00A8C2C6 /* EvaluationModel.m */,
 				5C14843B1C4601CA006F92D2 /* Main.storyboard */,
 				5C14843E1C4601CA006F92D2 /* Assets.xcassets */,
 				5C1484401C4601CA006F92D2 /* LaunchScreen.storyboard */,
@@ -281,7 +286,8 @@
 				5C14843A1C4601CA006F92D2 /* ViewController.m in Sources */,
 				5C1484371C4601CA006F92D2 /* AppDelegate.m in Sources */,
 				5C1484341C4601CA006F92D2 /* main.m in Sources */,
-				5C4F8B841C465B210034295A /* CalculatorModel.m in Sources */,
+				5CD133EE1C4ED387006E4826 /* CalculatorFSMModel.m in Sources */,
+				5CF77B5E1C4F71CB00A8C2C6 /* EvaluationModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
