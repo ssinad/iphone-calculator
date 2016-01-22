@@ -19,6 +19,9 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     CalculatorViewEqualDidPress
 };
 @property CalculatorViewState viewState;
+
+-(void)resetButtonWidths;
+
 @end
 
 @implementation ViewController
@@ -55,8 +58,17 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 -(void)viewWillAppear:(BOOL)animated{
     for (UIButton * button in self.view.subviews){
         if ([button isKindOfClass:[UIButton class]]) {
-            button.layer.borderWidth = 0.5f;
+            button.layer.borderWidth = 0.25f;
             button.layer.borderColor = [UIColor blackColor].CGColor;
+        }
+    }
+}
+
+-(void)resetButtonWidths{
+    for (UIButton * button in self.view.subviews){
+        if ([button isKindOfClass:[UIButton class]]) {
+            button.layer.borderWidth = 0.25f;
+//            button.layer.borderColor = [UIColor blackColor].CGColor;
         }
     }
 }
@@ -68,6 +80,8 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 
 - (IBAction)deleteButtonDidTouch:(UIButton *)sender {
     unsigned long length = self.resultLabel.text.length;
+    if (self.viewState == CalculatorViewOperatorDidSelect)
+        return;
     if (length > 1){
         self.resultLabel.text = [self.resultLabel.text substringToIndex:length - 1];
     }
@@ -81,6 +95,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     [self.clearButton setTitle:@"C" forState:UIControlStateNormal];
     [self setResultLabelText:sender.titleLabel.text];
     [self.calculatorFSMModel addCharacter:sender.titleLabel.text];
+    [self resetButtonWidths];
 //    if (![sender.titleLabel.text isEqualToString:@"0"])
 //        [self.clearButton setTitle:@"C" forState:UIControlStateNormal];
     
@@ -97,6 +112,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     }
     
     self.viewState = CalculatorViewEnteringNumber;
+    [self resetButtonWidths];
 }
 - (IBAction)negationButtonDidTouch:(UIButton *)sender {
     if ([self.resultLabel.text containsString:@"-"]) {
@@ -111,26 +127,31 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 - (IBAction)addButtonDidTouch:(UIButton *)sender {
     self.resultLabel.text = [self.calculatorFSMModel addOperator:ADD andLabelText:self.resultLabel.text];
     self.viewState = CalculatorViewOperatorDidSelect;
+    sender.layer.borderWidth = 2.0f;
 }
 
 - (IBAction)subtractButtonDidTouch:(UIButton *)sender {
         self.resultLabel.text = [self.calculatorFSMModel addOperator:SUBTRACT andLabelText:self.resultLabel.text];
     self.viewState = CalculatorViewOperatorDidSelect;
+    sender.layer.borderWidth = 2.0f;
 }
 
 - (IBAction)multiplicationButtonDidTouch:(UIButton *)sender {
         self.resultLabel.text = [self.calculatorFSMModel addOperator:MULTIPLY andLabelText:self.resultLabel.text];
     self.viewState = CalculatorViewOperatorDidSelect;
+        sender.layer.borderWidth = 2.0f;
 }
 
 - (IBAction)divisionButtonDidTouch:(UIButton *)sender {
         self.resultLabel.text = [self.calculatorFSMModel addOperator:DIVIDE andLabelText:self.resultLabel.text];
     self.viewState = CalculatorViewOperatorDidSelect;
+        sender.layer.borderWidth = 2.0f;
 }
 
 - (IBAction)equalButtonDidTouch:(UIButton *)sender {
     self.viewState = CalculatorViewEqualDidPress;
     self.resultLabel.text = [self.calculatorFSMModel equalEvaluateWithLabelText:self.resultLabel.text];
+    [self resetButtonWidths];
 }
 
 
