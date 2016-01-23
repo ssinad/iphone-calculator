@@ -94,7 +94,13 @@
     @try {
         switch (self.state) {
             case CalculatorStateInitial:
-                self.state = CalculatorStateInitial;
+                //self.state = CalculatorStateInitial;
+                self.state = CalculatorStateFirstOperatorSelected;
+                self.lastOperand = number;
+                [self.evaluationModel addOperand:number];
+                //            self.result = number;
+                [self.evaluationModel addCalculatorOperator:calculatorOperator];
+                self.lastOperator = calculatorOperator;
                 break;
                 
             case CalculatorStateEnteringFirstNumber:
