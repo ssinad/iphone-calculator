@@ -66,9 +66,6 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
         if ([button isKindOfClass:[UIButton class]]) {
             button.layer.borderWidth = 0.25f;
             button.layer.borderColor = [UIColor blackColor].CGColor;
-            if ([button.titleLabel.text isEqualToString:@"0"]){
-                button.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 2 * button.frame.size.width / 3);
-            }
         }
     }
 }
