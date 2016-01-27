@@ -45,7 +45,7 @@
 }
 
 
--(void)addCharacter:(NSString *)character{
+-(void)addCharacter{
 //    switch (self.state) {
 //        case CalculatorStateInitial:
 //            break;
@@ -87,9 +87,9 @@
             break;
                 }
 }
--(NSString *)addOperator:(CalculatorOperator)calculatorOperator andLabelText: (NSString *) labelText{
-    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithString:labelText];
-    NSString * temporaryResult = [NSString stringWithString:labelText];
+-(NSString *)addOperator:(CalculatorOperator)calculatorOperator andLabelText: (NSNumber *) inputNumber{
+    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithDecimal:[inputNumber decimalValue]];
+    NSString * temporaryResult = [NSString stringWithFormat:@"%@", inputNumber];
 //    NSLog(@"%@ %@ %@", temporaryResult, number, labelText);
     @try {
         switch (self.state) {
@@ -156,9 +156,9 @@
 }
 
 
--(NSString *)equalEvaluateWithLabelText:(NSString *)labelText{
-    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithString:labelText];
-    NSString * temporaryResult = [NSString stringWithString:labelText];
+-(NSString *)equalEvaluateWithLabelText:(NSNumber *)inputNumber{
+    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithDecimal:[inputNumber decimalValue]];
+    NSString * temporaryResult = [NSString stringWithFormat:@"%@", inputNumber];
     //    NSLog(@"%@ %@ %@", temporaryResult, number, labelText);
     @try {
         switch (self.state) {

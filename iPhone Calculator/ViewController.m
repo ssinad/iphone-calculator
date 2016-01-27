@@ -12,6 +12,10 @@
 
 @interface ViewController ()
 -(void)setResultLabelText:(NSString*) number;
+-(void)addCharacterToResultLabelText:(NSString*) number;
+-(void)addPointToResultLabel;
+@property NSNumberFormatter * numberFormatter;
+
 typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     CalculatorViewInitial,
     CalculatorViewEnteringNumber,
@@ -20,7 +24,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 };
 @property CalculatorViewState viewState;
 
--(void)resetButtonWidths;
+-(void)resetButtonBorderWidths;
 
 @end
 
@@ -31,15 +35,40 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     [self.calculatorFSMModel resetAll];
     self.viewState = CalculatorViewInitial;
 }
--(void)setResultLabelText:(NSString *)number{
+
+-(void)addCharacterToResultLabelText:(NSString *)labelText{
+    NSString * temporaryString = self.resultLabel.text;
+    if (self.resultLabel.text.length >= 11)
+        return;
     if ([self.resultLabel.text isEqualToString:@"0"] || self.viewState == CalculatorViewEqualDidPress || self.viewState == CalculatorViewOperatorDidSelect){
-        self.resultLabel.text = number;
+        temporaryString = labelText;
     }
     else{
-        self.resultLabel.text = [self.resultLabel.text stringByAppendingString:number];
+        temporaryString = [temporaryString stringByAppendingString:labelText];
     }
-    self.viewState = CalculatorViewEnteringNumber;
+    
+    NSNumber * number = [self.numberFormatter numberFromString:temporaryString];
+    self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+    
 }
+
+-(void)addPointToResultLabel{
+    NSString * temporaryString = self.resultLabel.text;
+    if (self.resultLabel.text.length >= 11)
+        return;
+    if (! [self.resultLabel.text containsString:@"."]){
+        temporaryString = [self.resultLabel.text stringByAppendingString:@"."];
+    }
+    NSNumber* number = [self.numberFormatter numberFromString:temporaryString];
+    self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+}
+
+-(void)setResultLabelText:(NSString *)inputNumber{
+    NSNumber* number = [self.numberFormatter numberFromString:inputNumber];
+    self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSExpression * expression = [NSExpression expressionWithFormat:@"2.1+2"];
@@ -47,11 +76,15 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     NSLog(@"%@", result);
     self.viewState = CalculatorViewInitial;
     self.calculatorFSMModel = [[CalculatorFSMModel alloc]init];
+    self.numberFormatter = [[NSNumberFormatter alloc]init];
+    self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    self.numberFormatter.lenient = YES;
 //    self.ACButton.layer.borderWidth = 1.0f;
 //    self.ACButton.layer.borderColor = [UIColor blackColor].CGColor;
     // Do any additional setup after loading the view, typically from a nib.
     
 }
+
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
@@ -81,7 +114,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     
 }
 
--(void)resetButtonWidths{
+-(void)resetButtonBorderWidths{
     for (UIButton * button in self.view.subviews){
         if ([button isKindOfClass:[UIButton class]]) {
             button.layer.borderWidth = 0.25f;
@@ -97,7 +130,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 
 - (IBAction)deleteButtonDidTouch:(UIButton *)sender {
     unsigned long length = self.resultLabel.text.length;
-    if (self.viewState == CalculatorViewOperatorDidSelect)
+    if (self.viewState == CalculatorViewOperatorDidSelect || self.viewState == CalculatorViewEqualDidPress)
         return;
     if (length > 1){
         self.resultLabel.text = [self.resultLabel.text substringToIndex:length - 1];
@@ -110,13 +143,21 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 
 - (IBAction)numberButtonDidTouch:(UIButton *)sender {
     [self.clearButton setTitle:@"C" forState:UIControlStateNormal];
-    [self setResultLabelText:sender.titleLabel.text];
-    [self.calculatorFSMModel addCharacter:sender.titleLabel.text];
-    [self resetButtonWidths];
+    [self addCharacterToResultLabelText:sender.titleLabel.text];
+    [self.calculatorFSMModel addCharacter];
+    [self resetButtonBorderWidths];
+    double textSize = [self.resultLabel.text sizeWithAttributes:nil].width;
+    NSLog(@"%lf", textSize);
+    if (self.resultLabel.frame.size.width <= textSize){
+        NSLog(@"Overflow");
+    }
+    self.viewState = CalculatorViewEnteringNumber;
 //    if (![sender.titleLabel.text isEqualToString:@"0"])
 //        [self.clearButton setTitle:@"C" forState:UIControlStateNormal];
     
 }
+
+
 
 - (IBAction)pointButtonDidTouch:(UIButton *)sender {
     [self.clearButton setTitle:@"C" forState:UIControlStateNormal];
@@ -124,12 +165,12 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     if (self.viewState == CalculatorViewEqualDidPress || self.viewState == CalculatorViewOperatorDidSelect)
         self.resultLabel.text = @"0";
     if (! [self.resultLabel.text containsString:@"."]){
-        self.resultLabel.text = [self.resultLabel.text stringByAppendingString:@"."];
-        [self.calculatorFSMModel addCharacter:sender.titleLabel.text];
+        [self addPointToResultLabel];
+        [self.calculatorFSMModel addCharacter];
     }
     
     self.viewState = CalculatorViewEnteringNumber;
-    [self resetButtonWidths];
+    [self resetButtonBorderWidths];
 }
 - (IBAction)negationButtonDidTouch:(UIButton *)sender {
     if ([self.resultLabel.text containsString:@"-"]) {
@@ -138,41 +179,46 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     else{
         self.resultLabel.text = [@"-" stringByAppendingString:self.resultLabel.text];
     }
-    [self.calculatorFSMModel addCharacter:@"-"];
+    [self.calculatorFSMModel addCharacter];
 }
 
 - (IBAction)addButtonDidTouch:(UIButton *)sender {
-    self.resultLabel.text = [self.calculatorFSMModel addOperator:ADD andLabelText:self.resultLabel.text];
+    NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
+    [self setResultLabelText:[self.calculatorFSMModel addOperator:ADD andLabelText:number]];
     self.viewState = CalculatorViewOperatorDidSelect;
-    [self resetButtonWidths];
+    [self resetButtonBorderWidths];
     sender.layer.borderWidth = 2.0f;
 }
 
 - (IBAction)subtractButtonDidTouch:(UIButton *)sender {
-        self.resultLabel.text = [self.calculatorFSMModel addOperator:SUBTRACT andLabelText:self.resultLabel.text];
+    NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
+    [self setResultLabelText:[self.calculatorFSMModel addOperator:SUBTRACT andLabelText:number]];
     self.viewState = CalculatorViewOperatorDidSelect;
-    [self resetButtonWidths];
+    [self resetButtonBorderWidths];
     sender.layer.borderWidth = 2.0f;
 }
 
 - (IBAction)multiplicationButtonDidTouch:(UIButton *)sender {
-        self.resultLabel.text = [self.calculatorFSMModel addOperator:MULTIPLY andLabelText:self.resultLabel.text];
+    NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
+    [self setResultLabelText:[self.calculatorFSMModel addOperator:MULTIPLY andLabelText:number]];
     self.viewState = CalculatorViewOperatorDidSelect;
-    [self resetButtonWidths];
+    [self resetButtonBorderWidths];
         sender.layer.borderWidth = 2.0f;
 }
 
 - (IBAction)divisionButtonDidTouch:(UIButton *)sender {
-        self.resultLabel.text = [self.calculatorFSMModel addOperator:DIVIDE andLabelText:self.resultLabel.text];
+    NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
+    [self  setResultLabelText:[self.calculatorFSMModel addOperator:DIVIDE andLabelText:number]];
     self.viewState = CalculatorViewOperatorDidSelect;
-    [self resetButtonWidths];
+    [self resetButtonBorderWidths];
         sender.layer.borderWidth = 2.0f;
 }
 
 - (IBAction)equalButtonDidTouch:(UIButton *)sender {
     self.viewState = CalculatorViewEqualDidPress;
-    self.resultLabel.text = [self.calculatorFSMModel equalEvaluateWithLabelText:self.resultLabel.text];
-    [self resetButtonWidths];
+    NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
+    [self setResultLabelText:[self.calculatorFSMModel equalEvaluateWithLabelText:number]];
+    [self resetButtonBorderWidths];
 }
 
 

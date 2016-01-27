@@ -52,6 +52,7 @@
     [self.operators addObject:@(calculatorOperator)];
 //    self.lastOperator = calculatorOperator;
     NSLog(@"%@", temporaryResult);
+//    NSNumberFormatter numberFormatter = [[NSNumberFormatter alloc]init];
     return [temporaryResult stringValue];
 }
 
