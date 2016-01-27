@@ -25,6 +25,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 @property CalculatorViewState viewState;
 
 -(void)resetButtonBorderWidths;
+-(void)deleteFromResultLabelText;
 
 @end
 
@@ -38,12 +39,10 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 
 -(void)addCharacterToResultLabelText:(NSString *)labelText{
     NSString * temporaryString = self.resultLabel.text;
-    if (self.resultLabel.text.length >= 11)
-        return;
     if ([self.resultLabel.text isEqualToString:@"0"] || self.viewState == CalculatorViewEqualDidPress || self.viewState == CalculatorViewOperatorDidSelect){
         temporaryString = labelText;
     }
-    else{
+    else if (self.resultLabel.text.length < 11){
         temporaryString = [temporaryString stringByAppendingString:labelText];
     }
     
@@ -63,10 +62,27 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
 }
 
+-(void)deleteFromResultLabelText{
+    unsigned long length = self.resultLabel.text.length;
+    NSString * temporaryString = self.resultLabel.text;
+    if (self.viewState == CalculatorViewOperatorDidSelect || self.viewState == CalculatorViewEqualDidPress)
+        return;
+    if (length > 1){
+        temporaryString = [self.resultLabel.text substringToIndex:length - 1];
+    }
+    else{
+        temporaryString = @"0";
+    }
+    NSNumber* number = [self.numberFormatter numberFromString:temporaryString];
+    self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+
+}
+
 -(void)setResultLabelText:(NSString *)inputNumber{
     NSNumber* number = [self.numberFormatter numberFromString:inputNumber];
     self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
 }
+
 
 
 - (void)viewDidLoad {
@@ -78,6 +94,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     self.calculatorFSMModel = [[CalculatorFSMModel alloc]init];
     self.numberFormatter = [[NSNumberFormatter alloc]init];
     self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+//    self.numberFormatter.numberStyle = NSNumberFormatterScientificStyle;
     self.numberFormatter.lenient = YES;
 //    self.ACButton.layer.borderWidth = 1.0f;
 //    self.ACButton.layer.borderColor = [UIColor blackColor].CGColor;
@@ -129,15 +146,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 }
 
 - (IBAction)deleteButtonDidTouch:(UIButton *)sender {
-    unsigned long length = self.resultLabel.text.length;
-    if (self.viewState == CalculatorViewOperatorDidSelect || self.viewState == CalculatorViewEqualDidPress)
-        return;
-    if (length > 1){
-        self.resultLabel.text = [self.resultLabel.text substringToIndex:length - 1];
-    }
-    else{
-        self.resultLabel.text = @"0";
-    }
+    [self deleteFromResultLabelText];
 }
 
 
