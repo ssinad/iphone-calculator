@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "CalculatorFSMModel.h"
 //#import <QuartzCore/QuartzCore.h>
+int const stringLimit = 11;
+int const limit = 9;
 
 @interface ViewController ()
 -(void)setResultLabelText:(NSString*) number;
@@ -42,7 +44,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     if ([self.resultLabel.text isEqualToString:@"0"] || self.viewState == CalculatorViewEqualDidPress || self.viewState == CalculatorViewOperatorDidSelect){
         temporaryString = labelText;
     }
-    else if (self.resultLabel.text.length < 11){
+    else if (self.resultLabel.text.length < stringLimit){
         temporaryString = [temporaryString stringByAppendingString:labelText];
     }
     
@@ -53,13 +55,14 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 
 -(void)addPointToResultLabel{
     NSString * temporaryString = self.resultLabel.text;
-    if (self.resultLabel.text.length >= 11)
+    if (self.resultLabel.text.length >= stringLimit)
         return;
     if (! [self.resultLabel.text containsString:@"."]){
         temporaryString = [self.resultLabel.text stringByAppendingString:@"."];
     }
-    NSNumber* number = [self.numberFormatter numberFromString:temporaryString];
-    self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+//    NSNumber* number = [self.numberFormatter numberFromString:temporaryString];
+//    self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+    self.resultLabel.text = temporaryString;
 }
 
 -(void)deleteFromResultLabelText{
@@ -79,8 +82,27 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 }
 
 -(void)setResultLabelText:(NSString *)inputNumber{
+    NSNumberFormatter * anotherNumberFormatter = [[NSNumberFormatter alloc]init];
     NSNumber* number = [self.numberFormatter numberFromString:inputNumber];
-    self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+    NSDecimalNumber * overflow = [NSDecimalNumber decimalNumberWithMantissa:10 exponent:(limit - 1) isNegative:NO];
+    NSDecimalNumber * underflow = [NSDecimalNumber decimalNumberWithMantissa:10 exponent:(-limit) isNegative:NO];
+    
+    if (!([number compare:underflow] == NSOrderedAscending /*|| [number compare:underflow] == NSOrderedSame [number isEqualToNumber:underflow]*/) && [number compare:overflow] == NSOrderedAscending){
+//    if (inputNumber.length > limit){
+        
+        anotherNumberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+        
+    }
+    else{
+        NSLog(@"%d", [number compare:underflow] == NSOrderedSame);
+        NSLog(@"%d", [number isEqualToNumber:underflow]);
+        anotherNumberFormatter.numberStyle = NSNumberFormatterScientificStyle;
+    }
+    anotherNumberFormatter.maximumSignificantDigits = limit;
+    anotherNumberFormatter.lenient = YES;
+    anotherNumberFormatter.locale = self.numberFormatter.locale;
+    number = [anotherNumberFormatter numberFromString:inputNumber];
+    self.resultLabel.text = [anotherNumberFormatter stringFromNumber:number];
 }
 
 
@@ -96,6 +118,8 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
 //    self.numberFormatter.numberStyle = NSNumberFormatterScientificStyle;
     self.numberFormatter.lenient = YES;
+    NSLocale * usLocale = [[NSLocale alloc]initWithLocaleIdentifier:@"en_US"];
+    self.numberFormatter.locale = usLocale;
 //    self.ACButton.layer.borderWidth = 1.0f;
 //    self.ACButton.layer.borderColor = [UIColor blackColor].CGColor;
     // Do any additional setup after loading the view, typically from a nib.
