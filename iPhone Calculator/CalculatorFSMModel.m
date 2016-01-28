@@ -145,7 +145,7 @@
             default:
                 break;
         }
-        NSLog(@"%@", temporaryResult);
+//        NSLog(@"%@", temporaryResult);
     }
     @catch (NSException *exception) {
         return @"Error";
@@ -209,7 +209,7 @@
                 break;
         }
         
-        NSLog(@"%@", temporaryResult);
+//        NSLog(@"%@", temporaryResult);
 
     }
     @catch (NSException *exception) {

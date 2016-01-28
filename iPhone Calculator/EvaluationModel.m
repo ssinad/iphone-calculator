@@ -51,7 +51,7 @@
     }
     [self.operators addObject:@(calculatorOperator)];
 //    self.lastOperator = calculatorOperator;
-    NSLog(@"%@", temporaryResult);
+//    NSLog(@"%@", temporaryResult);
 //    NSNumberFormatter numberFormatter = [[NSNumberFormatter alloc]init];
     return [temporaryResult stringValue];
 }
@@ -114,7 +114,7 @@
         case DIVIDE:
             //c = a / b;
             if ([b doubleValue] == 0){
-                NSLog(@"Division by zero");
+//                NSLog(@"Division by zero");
                 return 0;
             }
             c = [a decimalNumberByDividingBy:b];

@@ -82,6 +82,10 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 }
 
 -(void)setResultLabelText:(NSString *)inputNumber{
+    if ([inputNumber isEqualToString:@"Error"]){
+        self.resultLabel.text = inputNumber;
+        return;
+    }
     NSNumberFormatter * anotherNumberFormatter = [[NSNumberFormatter alloc]init];
     NSNumber* signedNumber = [self.numberFormatter numberFromString:inputNumber];
     NSNumber * number = [NSNumber numberWithDouble:fabs(signedNumber.doubleValue)];
@@ -97,8 +101,8 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
         
     }
     else{
-        NSLog(@"%d", [number compare:underflow] == NSOrderedSame);
-        NSLog(@"%d", [number isEqualToNumber:underflow]);
+//        NSLog(@"%d", [number compare:underflow] == NSOrderedSame);
+//        NSLog(@"%d", [number isEqualToNumber:underflow]);
         anotherNumberFormatter.numberStyle = NSNumberFormatterScientificStyle;
     }
     anotherNumberFormatter.maximumSignificantDigits = limit;
@@ -112,9 +116,9 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSExpression * expression = [NSExpression expressionWithFormat:@"2.1+2"];
-    NSNumber *result = [expression expressionValueWithObject:nil context:nil];
-    NSLog(@"%@", result);
+//    NSExpression * expression = [NSExpression expressionWithFormat:@"sin(pi)"];
+//    NSNumber *result = [expression expressionValueWithObject:nil context:nil];
+//    NSLog(@"%@", result);
     self.viewState = CalculatorViewInitial;
     self.calculatorFSMModel = [[CalculatorFSMModel alloc]init];
     self.numberFormatter = [[NSNumberFormatter alloc]init];
@@ -182,11 +186,11 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     [self addCharacterToResultLabelText:sender.titleLabel.text];
     [self.calculatorFSMModel addCharacter];
     [self resetButtonBorderWidths];
-    double textSize = [self.resultLabel.text sizeWithAttributes:nil].width;
-    NSLog(@"%lf", textSize);
-    if (self.resultLabel.frame.size.width <= textSize){
-        NSLog(@"Overflow");
-    }
+//    double textSize = [self.resultLabel.text sizeWithAttributes:nil].width;
+//    NSLog(@"%lf", textSize);
+//    if (self.resultLabel.frame.size.width <= textSize){
+//        NSLog(@"Overflow");
+//    }
     self.viewState = CalculatorViewEnteringNumber;
 //    if (![sender.titleLabel.text isEqualToString:@"0"])
 //        [self.clearButton setTitle:@"C" forState:UIControlStateNormal];
