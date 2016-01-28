@@ -83,9 +83,12 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 
 -(void)setResultLabelText:(NSString *)inputNumber{
     NSNumberFormatter * anotherNumberFormatter = [[NSNumberFormatter alloc]init];
-    NSNumber* number = [self.numberFormatter numberFromString:inputNumber];
-    NSDecimalNumber * overflow = [NSDecimalNumber decimalNumberWithMantissa:10 exponent:(limit - 1) isNegative:NO];
-    NSDecimalNumber * underflow = [NSDecimalNumber decimalNumberWithMantissa:10 exponent:(-limit) isNegative:NO];
+    NSNumber* signedNumber = [self.numberFormatter numberFromString:inputNumber];
+    NSNumber * number = [NSNumber numberWithDouble:fabs(signedNumber.doubleValue)];
+//    NSDecimalNumber * overflow = [NSDecimalNumber decimalNumberWithMantissa:10 exponent:(limit - 1) isNegative:NO];
+//    NSDecimalNumber * underflow = [NSDecimalNumber decimalNumberWithMantissa:10 exponent:(-limit) isNegative:NO];
+    NSNumber * overflow = [NSNumber numberWithDouble:pow(10, limit)];
+    NSNumber * underflow = [NSNumber numberWithDouble:pow(10, -limit + 1)];
     
     if (!([number compare:underflow] == NSOrderedAscending /*|| [number compare:underflow] == NSOrderedSame [number isEqualToNumber:underflow]*/) && [number compare:overflow] == NSOrderedAscending){
 //    if (inputNumber.length > limit){
