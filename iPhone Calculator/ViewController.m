@@ -11,6 +11,7 @@
 //#import <QuartzCore/QuartzCore.h>
 int const stringLimit = 11;
 int const limit = 9;
+int const scientificLimit = 7;
 
 @interface ViewController ()
 -(void)setResultLabelText:(NSString*) number;
@@ -109,20 +110,21 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 //    if (inputNumber.length > limit){
         
         anotherNumberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-        
+        anotherNumberFormatter.maximumSignificantDigits = limit;
     }
     else{
 //        NSLog(@"%d", [number compare:underflow] == NSOrderedSame);
 //        NSLog(@"%d", [number isEqualToNumber:underflow]);
         anotherNumberFormatter.numberStyle = NSNumberFormatterScientificStyle;
+        anotherNumberFormatter.maximumSignificantDigits = scientificLimit;
+        anotherNumberFormatter.exponentSymbol = @"e";
     }
-    anotherNumberFormatter.maximumSignificantDigits = limit;
+    
     anotherNumberFormatter.lenient = YES;
     anotherNumberFormatter.locale = self.numberFormatter.locale;
     number = [anotherNumberFormatter numberFromString:inputNumber];
     self.resultLabel.text = [anotherNumberFormatter stringFromNumber:number];
 }
-
 
 
 - (void)viewDidLoad {
@@ -210,7 +212,6 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 }
 
 
-
 - (IBAction)pointButtonDidTouch:(UIButton *)sender {
     [self.clearButton setTitle:@"C" forState:UIControlStateNormal];
     
@@ -224,6 +225,8 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     self.viewState = CalculatorViewEnteringNumber;
     [self resetButtonBorderWidths];
 }
+
+
 - (IBAction)negationButtonDidTouch:(UIButton *)sender {
     if ([self.resultLabel.text containsString:@"-"]) {
         self.resultLabel.text = [self.resultLabel.text substringFromIndex:1];
@@ -234,6 +237,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     [self.calculatorFSMModel addCharacter];
 }
 
+
 - (IBAction)addButtonDidTouch:(UIButton *)sender {
     NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
     [self setResultLabelText:[self.calculatorFSMModel addOperator:ADD andLabelText:number]];
@@ -241,6 +245,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     [self resetButtonBorderWidths];
     sender.layer.borderWidth = 2.0f;
 }
+
 
 - (IBAction)subtractButtonDidTouch:(UIButton *)sender {
     NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
@@ -250,6 +255,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     sender.layer.borderWidth = 2.0f;
 }
 
+
 - (IBAction)multiplicationButtonDidTouch:(UIButton *)sender {
     NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
     [self setResultLabelText:[self.calculatorFSMModel addOperator:MULTIPLY andLabelText:number]];
@@ -258,6 +264,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
         sender.layer.borderWidth = 2.0f;
 }
 
+
 - (IBAction)divisionButtonDidTouch:(UIButton *)sender {
     NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
     [self  setResultLabelText:[self.calculatorFSMModel addOperator:DIVIDE andLabelText:number]];
@@ -265,6 +272,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     [self resetButtonBorderWidths];
         sender.layer.borderWidth = 2.0f;
 }
+
 
 - (IBAction)equalButtonDidTouch:(UIButton *)sender {
     self.viewState = CalculatorViewEqualDidPress;
