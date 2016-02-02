@@ -48,8 +48,11 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
         temporaryString = [temporaryString stringByAppendingString:labelText];
     }
     
-    NSNumber * number = [self.numberFormatter numberFromString:temporaryString];
-    self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+    if (![labelText isEqualToString:@"0"]) {
+        NSNumber * number = [self.numberFormatter numberFromString:temporaryString];
+        self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+        }
+
     
 }
 
@@ -94,7 +97,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     NSNumber * overflow = [NSNumber numberWithDouble:pow(10, limit)];
     NSNumber * underflow = [NSNumber numberWithDouble:pow(10, -limit + 1)];
     
-    if (!([number compare:underflow] == NSOrderedAscending /*|| [number compare:underflow] == NSOrderedSame [number isEqualToNumber:underflow]*/) && [number compare:overflow] == NSOrderedAscending){
+    if ((!([number compare:underflow] == NSOrderedAscending )/*|| [number compare:underflow] == NSOrderedSame [number isEqualToNumber:underflow]*/ && [number compare:overflow] == NSOrderedAscending) || [number isEqualToNumber:@(0)]){
 //    if (inputNumber.length > limit){
         
         anotherNumberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
@@ -124,6 +127,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     self.numberFormatter = [[NSNumberFormatter alloc]init];
     self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
 //    self.numberFormatter.numberStyle = NSNumberFormatterScientificStyle;
+    self.numberFormatter.maximumSignificantDigits = limit;
     self.numberFormatter.lenient = YES;
     NSLocale * usLocale = [[NSLocale alloc]initWithLocaleIdentifier:@"en_US"];
     self.numberFormatter.locale = usLocale;
