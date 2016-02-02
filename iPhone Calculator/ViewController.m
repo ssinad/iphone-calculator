@@ -83,7 +83,12 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
         temporaryString = @"0";
     }
     NSNumber* number = [self.numberFormatter numberFromString:temporaryString];
-    self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+    if ([number isEqualToNumber:@(0)]){
+        self.resultLabel.text = temporaryString;
+    }
+    else{
+        self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+    }
 
 }
 
