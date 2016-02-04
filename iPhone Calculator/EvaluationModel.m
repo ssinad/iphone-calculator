@@ -20,6 +20,7 @@
 -(BOOL)shouldPushIntoOperatorStack:(CalculatorOperator) calculatorOperator;
 -(NSDecimalNumber *) calculateFirstOperand:(NSDecimalNumber *) a calculatorOperator:(CalculatorOperator)calculatorOperator secondOperator: (NSDecimalNumber*) b;
 //-(NSString *)evaluateWithOperand: operand;
+-(void)logCalculationWithFirst:(NSDecimalNumber *) a calculatorOperator:(CalculatorOperator)calculatorOperator second: (NSDecimalNumber*) b andResult:(NSDecimalNumber *) result;
 
 @end
 
@@ -123,10 +124,40 @@
             c = 0;
             break;
     }
+//    [self logCalculationWithFirst:a calculatorOperator:calculatorOperator second:b andResult:c];
     return c;
 }
 
 
+-(void)logCalculationWithFirst:(NSDecimalNumber *)a calculatorOperator:(CalculatorOperator)calculatorOperator second:(NSDecimalNumber *)b andResult:(NSDecimalNumber *)result{
+    NSString * evalStr = [NSString stringWithFormat:@"%@ ", a];
+    switch (calculatorOperator) {
+            
+            case ADD:
+//                        self.result = [self.result decimalNumberByAdding:operand];
+            evalStr = [evalStr stringByAppendingString:@" + "];
+                        break;
+                    case SUBTRACT:
+            evalStr = [evalStr stringByAppendingString:@" - "];
+//                        self.result = [self.result decimalNumberBySubtracting:operand];
+                        break;
+                    case MULTIPLY:
+            evalStr = [evalStr stringByAppendingString:@" × "];
+//                        self.result = [self.result decimalNumberByMultiplyingBy:operand];
+                        break;
+                    case DIVIDE:
+//                        if ([self.lastOperand compare:@(0)] == NSOrderedSame){
+//                            return @"Division By Zero";
+//                        }
+//                        self.result = [self.result decimalNumberByDividingBy:operand];
+            evalStr = [evalStr stringByAppendingString:@" ÷ "];
+                        break;
+                    default:
+                        break;
+                }
+    evalStr = [evalStr stringByAppendingString:[NSString stringWithFormat:@"%@ = %@", b, result]];
+    NSLog(@"%@", evalStr);
+}
 //-(NSString *)evaluateWithOperand: (NSDecimalNumber *) operand{
 //    NSLog(@"%ld %@ %@", (long)self.lastOperator, self.result, operand);
 //    switch (self.lastOperator) {

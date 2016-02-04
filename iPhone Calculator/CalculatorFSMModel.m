@@ -25,7 +25,7 @@
 
 -(void)resetAll{
     self.state = CalculatorStateInitial;
-    self.result = [NSDecimalNumber decimalNumberWithString:@"0"];
+    self.result = [NSDecimalNumber decimalNumberWithDecimal:[@0 decimalValue]];
     self.lastOperand = nil;
     self.lastOperator = N;
     self.evaluationModel = [[EvaluationModel alloc]init];
@@ -87,8 +87,8 @@
             break;
                 }
 }
--(NSString *)addOperator:(CalculatorOperator)calculatorOperator andLabelText: (NSNumber *) inputNumber{
-    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithDecimal:[inputNumber decimalValue]];
+-(NSString *)addOperator:(CalculatorOperator)calculatorOperator andLabelText: (NSString *) inputNumber {
+    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithString:inputNumber];
     NSString * temporaryResult = [NSString stringWithFormat:@"%@", inputNumber];
 //    NSLog(@"%@ %@ %@", temporaryResult, number, labelText);
     @try {
@@ -148,6 +148,7 @@
 //        NSLog(@"%@", temporaryResult);
     }
     @catch (NSException *exception) {
+        [self resetAll];
         return @"Error";
     }
     
@@ -156,8 +157,8 @@
 }
 
 
--(NSString *)equalEvaluateWithLabelText:(NSNumber *)inputNumber{
-    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithDecimal:[inputNumber decimalValue]];
+-(NSString *)equalEvaluateWithLabelText:(NSString *)inputNumber{
+    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithString:inputNumber];
     NSString * temporaryResult = [NSString stringWithFormat:@"%@", inputNumber];
     //    NSLog(@"%@ %@ %@", temporaryResult, number, labelText);
     @try {
@@ -213,6 +214,7 @@
 
     }
     @catch (NSException *exception) {
+        [self resetAll];
         return @"Error";
     }
     
