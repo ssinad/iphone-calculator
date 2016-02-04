@@ -125,6 +125,11 @@
             break;
     }
 //    [self logCalculationWithFirst:a calculatorOperator:calculatorOperator second:b andResult:c];
+    NSNumber * abs = [NSNumber numberWithDouble:fabs([c doubleValue])];
+    if (abs > 0 && [abs compare:@1e-90] == NSOrderedAscending){
+        [NSException exceptionWithName:@"UnderflowException" reason:@"Underflow" userInfo:nil];
+        [NSException raise:@"UnderFlowException" format:@"Underflow"];
+    }
     return c;
 }
 
