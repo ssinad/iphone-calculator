@@ -33,6 +33,18 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 @end
 
 @implementation ViewController
+
+
+//- (BOOL)shouldAutorotate
+//{
+//    return NO;
+//}
+//
+//- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+//{
+//    return UIInterfaceOrientationMaskPortrait;
+//}
+
 - (IBAction)clearResultLabel:(UIButton *)sender {
     self.resultLabel.text = @"0";
     [self.clearButton setTitle:@"AC" forState:UIControlStateNormal];
