@@ -87,8 +87,8 @@
             break;
                 }
 }
--(NSString *)addOperator:(CalculatorOperator)calculatorOperator andLabelText: (NSString *) inputNumber {
-    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithString:inputNumber];
+-(NSString *)addOperator:(CalculatorOperator)calculatorOperator andLabelText: (NSNumber *) inputNumber {
+    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithDecimal:[inputNumber decimalValue]];
     NSString * temporaryResult = [NSString stringWithFormat:@"%@", inputNumber];
 //    NSLog(@"%@ %@ %@", temporaryResult, number, labelText);
     @try {
@@ -157,8 +157,8 @@
 }
 
 
--(NSString *)equalEvaluateWithLabelText:(NSString *)inputNumber{
-    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithString:inputNumber];
+-(NSString *)equalEvaluateWithLabelText:(NSNumber *)inputNumber{
+    NSDecimalNumber * number = [NSDecimalNumber decimalNumberWithDecimal:[inputNumber decimalValue]];
     NSString * temporaryResult = [NSString stringWithFormat:@"%@", inputNumber];
     //    NSLog(@"%@ %@ %@", temporaryResult, number, labelText);
     @try {

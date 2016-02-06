@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, CalculatorOperator) {
 @property (readonly) CalculatorState state;
 
 -(void)addCharacter;
--(NSString *)addOperator:(CalculatorOperator) calculatorOperator andLabelText: (NSString *) number;
+-(NSString *)addOperator:(CalculatorOperator) calculatorOperator andLabelText: (NSNumber *) number;
 -(void)resetAll;
--(NSString *)equalEvaluateWithLabelText: (NSString *) number;
+-(NSString *)equalEvaluateWithLabelText: (NSNumber *) number;
 @end
