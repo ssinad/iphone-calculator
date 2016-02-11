@@ -17,6 +17,7 @@ int const scientificLimit = 7;
 -(void)setResultLabelText:(NSString*) number;
 -(void)addCharacterToResultLabelText:(NSString*) number;
 -(void)addPointToResultLabel;
+-(void)addOperator:(CalculatorOperator) calculatorOperator fromSender:(UIButton *) sender;
 @property NSNumberFormatter * numberFormatter;
 
 typedef NS_ENUM(NSUInteger, CalculatorViewState) {
@@ -54,7 +55,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 
 -(void)addCharacterToResultLabelText:(NSString *)labelText{
     NSString * temporaryString = self.resultLabel.text;
-    if ([self.resultLabel.text isEqualToString:@"0"] || self.viewState == CalculatorViewEqualDidPress || self.viewState == CalculatorViewOperatorDidSelect){
+    if ([self.resultLabel.text isEqualToString:@"0"] || [self.resultLabel.text isEqualToString:@"Error"] || self.viewState == CalculatorViewEqualDidPress || self.viewState == CalculatorViewOperatorDidSelect){
         temporaryString = labelText;
     }
     else if (self.resultLabel.text.length < stringLimit){
@@ -249,47 +250,58 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
     [self.calculatorFSMModel addCharacter];
 }
 
-
-- (IBAction)addButtonDidTouch:(UIButton *)sender {
+-(void)addOperator:(CalculatorOperator)calculatorOperator fromSender:(UIButton *)sender{
+    if ([self.resultLabel.text isEqualToString:@"Error"])
+        return;
     NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
-    [self setResultLabelText:[self.calculatorFSMModel addOperator:ADD andLabelText:number]];
+    @try {
+        [self setResultLabelText:[self.calculatorFSMModel addOperator:calculatorOperator andLabelText:number]];
+    }
+    @catch (NSException *exception) {
+        [self setResultLabelText:@"Error"];
+        //        self.resultLabel.text = @"Error";
+        self.viewState = CalculatorStateInitial;
+    }
+    
     self.viewState = CalculatorViewOperatorDidSelect;
     [self resetButtonBorderWidths];
     sender.layer.borderWidth = 2.0f;
+}
+
+- (IBAction)addButtonDidTouch:(UIButton *)sender {
+    [self addOperator:ADD fromSender:sender];
 }
 
 
 - (IBAction)subtractButtonDidTouch:(UIButton *)sender {
-    NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
-    [self setResultLabelText:[self.calculatorFSMModel addOperator:SUBTRACT andLabelText:number]];
-    self.viewState = CalculatorViewOperatorDidSelect;
-    [self resetButtonBorderWidths];
-    sender.layer.borderWidth = 2.0f;
+    [self addOperator:SUBTRACT fromSender:sender];
 }
 
 
 - (IBAction)multiplicationButtonDidTouch:(UIButton *)sender {
-    NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
-    [self setResultLabelText:[self.calculatorFSMModel addOperator:MULTIPLY andLabelText:number]];
-    self.viewState = CalculatorViewOperatorDidSelect;
-    [self resetButtonBorderWidths];
-        sender.layer.borderWidth = 2.0f;
+    [self addOperator:MULTIPLY fromSender:sender];
 }
 
 
 - (IBAction)divisionButtonDidTouch:(UIButton *)sender {
-    NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
-    [self  setResultLabelText:[self.calculatorFSMModel addOperator:DIVIDE andLabelText:number]];
-    self.viewState = CalculatorViewOperatorDidSelect;
-    [self resetButtonBorderWidths];
-        sender.layer.borderWidth = 2.0f;
+    [self addOperator:DIVIDE fromSender:sender];
 }
 
 
 - (IBAction)equalButtonDidTouch:(UIButton *)sender {
+    if ([self.resultLabel.text isEqualToString:@"Error"]){
+        return;
+    }
     self.viewState = CalculatorViewEqualDidPress;
     NSNumber * number = [self.numberFormatter numberFromString:self.resultLabel.text];
-    [self setResultLabelText:[self.calculatorFSMModel equalEvaluateWithLabelText:number]];
+    @try {
+[self setResultLabelText:[self.calculatorFSMModel equalEvaluateWithLabelText:number]];
+    }
+    @catch (NSException *exception) {
+        self.resultLabel.text = @"Error";
+        self.viewState = CalculatorStateInitial;
+    }
+    
     [self resetButtonBorderWidths];
 }
 

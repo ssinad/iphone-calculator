@@ -149,7 +149,9 @@
     }
     @catch (NSException *exception) {
         [self resetAll];
-        return @"Error";
+//        return @"Error";
+        [NSException raise:@"NSException" format:@"Error occured!"];
+        
     }
     
     
@@ -215,7 +217,8 @@
     }
     @catch (NSException *exception) {
         [self resetAll];
-        return @"Error";
+        [NSException raise:@"NSException" format:@"Error occured!"];
+//        return @"Error";
     }
     
     return temporaryResult;
