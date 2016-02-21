@@ -142,22 +142,21 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    NSExpression * expression = [NSExpression expressionWithFormat:@"sin(pi)"];
-//    NSNumber *result = [expression expressionValueWithObject:nil context:nil];
-//    NSLog(@"%@", result);
+    // Do any additional setup after loading the view, typically from a nib.
+    //    NSExpression * expression = [NSExpression expressionWithFormat:@"sin(pi)"];
+    //    NSNumber *result = [expression expressionValueWithObject:nil context:nil];
+    //    NSLog(@"%@", result);
     self.viewState = CalculatorViewInitial;
     self.calculatorFSMModel = [[CalculatorFSMModel alloc]init];
     self.numberFormatter = [[NSNumberFormatter alloc]init];
     self.numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-//    self.numberFormatter.numberStyle = NSNumberFormatterScientificStyle;
+    //    self.numberFormatter.numberStyle = NSNumberFormatterScientificStyle;
     self.numberFormatter.maximumSignificantDigits = limit;
     self.numberFormatter.lenient = YES;
     NSLocale * usLocale = [[NSLocale alloc]initWithLocaleIdentifier:@"en_US"];
     self.numberFormatter.locale = usLocale;
-//    self.ACButton.layer.borderWidth = 1.0f;
-//    self.ACButton.layer.borderColor = [UIColor blackColor].CGColor;
-    // Do any additional setup after loading the view, typically from a nib.
-    
+    //    self.ACButton.layer.borderWidth = 1.0f;
+    //    self.ACButton.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
 
@@ -172,7 +171,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 //    NSLog(@"view will appear");
     for (UIButton * button in self.view.subviews){
         if ([button isKindOfClass:[UIButton class]]) {
-            button.layer.borderWidth = 0.25f;
+            button.layer.borderWidth = 0.5f;
             button.layer.borderColor = [UIColor blackColor].CGColor;
         }
     }
@@ -192,7 +191,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 -(void)resetButtonBorderWidths{
     for (UIButton * button in self.view.subviews){
         if ([button isKindOfClass:[UIButton class]]) {
-            button.layer.borderWidth = 0.25f;
+            button.layer.borderWidth = 0.5f;
 //            button.layer.borderColor = [UIColor blackColor].CGColor;
         }
     }
