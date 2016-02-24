@@ -62,12 +62,13 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
         temporaryString = [temporaryString stringByAppendingString:labelText];
     }
     
-    if (![labelText isEqualToString:@"0"]) {
-        NSNumber * number = [self.numberFormatter numberFromString:temporaryString];
-        self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+    if ([labelText isEqualToString:@"0"] && [self.resultLabel.text containsString:@"."]) {
+        self.resultLabel.text = temporaryString;
         }
     else{
-        self.resultLabel.text = temporaryString;
+        NSNumber * number = [self.numberFormatter numberFromString:temporaryString];
+        self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
+        
     }
 
     
@@ -75,7 +76,7 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 
 -(void)addPointToResultLabel{
     NSString * temporaryString = self.resultLabel.text;
-    if (self.resultLabel.text.length >= stringLimit)
+    if (self.resultLabel.text.length >= stringLimit - 1)
         return;
     if (! [self.resultLabel.text containsString:@"."]){
         temporaryString = [self.resultLabel.text stringByAppendingString:@"."];
