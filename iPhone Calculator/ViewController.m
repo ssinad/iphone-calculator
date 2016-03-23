@@ -18,6 +18,7 @@ int const scientificLimit = 7;
 -(void)addCharacterToResultLabelText:(NSString*) number;
 -(void)addPointToResultLabel;
 -(void)addOperator:(CalculatorOperator) calculatorOperator fromSender:(UIButton *) sender;
+-(int)digitCount:(NSString *)input;
 @property NSNumberFormatter * numberFormatter;
 
 typedef NS_ENUM(NSUInteger, CalculatorViewState) {
@@ -35,7 +36,16 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 
 @implementation ViewController
 
-
+-(int)digitCount:(NSString *)input{
+    uint count = 0;
+    for (NSUInteger i = 0 ; i < input.length; ++i) {
+        unichar uni = [input characterAtIndex:i];
+        if ('0' <= uni && uni <= '9') {
+            ++count;
+        }
+    }
+    return count;
+}
 //- (BOOL)shouldAutorotate
 //{
 //    return NO;
@@ -54,30 +64,40 @@ typedef NS_ENUM(NSUInteger, CalculatorViewState) {
 }
 
 -(void)addCharacterToResultLabelText:(NSString *)labelText{
+    
     NSString * temporaryString = self.resultLabel.text;
     if ([self.resultLabel.text isEqualToString:@"0"] || [self.resultLabel.text isEqualToString:@"Error"] || self.viewState == CalculatorViewEqualDidPress || self.viewState == CalculatorViewOperatorDidSelect){
         temporaryString = labelText;
     }
-    else if (self.resultLabel.text.length < stringLimit){
+//    else if (self.resultLabel.text.length < stringLimit)
+    else
+    {
         temporaryString = [temporaryString stringByAppendingString:labelText];
     }
     
+    if ([self digitCount:temporaryString] > limit)
+        return;
+    NSNumber * number = [self.numberFormatter numberFromString:temporaryString];
+//    NSString * anotherTemporaryString = [self.numberFormatter stringFromNumber:number];
+//    
+//    
     if ([labelText isEqualToString:@"0"] && [self.resultLabel.text containsString:@"."]) {
         self.resultLabel.text = temporaryString;
         }
     else{
-        NSNumber * number = [self.numberFormatter numberFromString:temporaryString];
+//        NSNumber * number = [self.numberFormatter numberFromString:temporaryString];
         self.resultLabel.text = [self.numberFormatter stringFromNumber:number];
-        
     }
+    
+
 
     
 }
 
 -(void)addPointToResultLabel{
     NSString * temporaryString = self.resultLabel.text;
-    if (self.resultLabel.text.length >= stringLimit - 1)
-        return;
+//    if (self.resultLabel.text.length >= stringLimit - 1)
+//        return;
     if (! [self.resultLabel.text containsString:@"."]){
         temporaryString = [self.resultLabel.text stringByAppendingString:@"."];
     }
